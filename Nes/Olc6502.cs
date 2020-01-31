@@ -14,7 +14,7 @@ namespace Nes
 		private byte _status = 0x00; // Status Register
 		private ushort _pc = 0x0000; //Program Counter
 
-		private byte _fetch = 0x0000;
+		private byte _fetched = 0x0000;
 
 		private ushort _address_abs = 0x0000;
 		private ushort _address_rel = 0x0000;
@@ -22,32 +22,32 @@ namespace Nes
 		private byte _opcode = 00;
 		private byte _cycles = 0x00;
 
-		private List<Instruction> _lookup;
+		private List<Instruction> _instructions;
 
 		public Olc6502()
-		{
-			var n = new Instruction(){name = "", operate = BPL, addressMode = BPL, cycles = 8};
-				
+		{ 
+			_instructions = new List<Instruction>()
+			{
+				new Instruction() {name = "BRK", operate = BRK, addressMode = IMM, cycles = 7 }, new Instruction() {name =  "ORA", operate = ORA, addressMode = IZX, cycles = 6 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 8 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 3 }, new Instruction() {name = "ORA", operate = ORA, addressMode =  ZP0, cycles = 3 }, new Instruction() {name = "ASL", operate = ASL, addressMode = ZP0, cycles = 5 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 5 }, new Instruction() {name = "PHP", operate = PHP, addressMode = IMP, cycles = 3 }, new Instruction() {name = "ORA", operate = ORA, addressMode = IMM, cycles = 2 }, new Instruction() {name = "ASL", operate = ASL, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "ORA", operate = ORA, addressMode = ABS, cycles = 4 }, new Instruction() {name = "ASL", operate = ASL, addressMode = ABS, cycles = 6 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 6 },
+				new Instruction() {name = "BPL", operate = BPL, addressMode = REL, cycles = 2 }, new Instruction() {name =  "ORA", operate = ORA, addressMode = IZY, cycles = 5 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 8 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "ORA", operate = ORA, addressMode =  ZPX, cycles = 4 }, new Instruction() {name = "ASL", operate = ASL, addressMode = ZPX, cycles = 6 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 6 }, new Instruction() {name = "CLC", operate = CLC, addressMode = IMP, cycles = 2 }, new Instruction() {name = "ORA", operate = ORA, addressMode = ABY, cycles = 4 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 7 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "ORA", operate = ORA, addressMode = ABX, cycles = 4 }, new Instruction() {name = "ASL", operate = ASL, addressMode = ABX, cycles = 7 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 7 },
+				new Instruction() {name = "JSR", operate = JSR, addressMode = ABS, cycles = 6 }, new Instruction() {name =  "AND", operate = AND, addressMode = IZX, cycles = 6 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 8 }, new Instruction() {name = "BIT", operate = BIT, addressMode = ZP0, cycles = 3 }, new Instruction() {name = "AND", operate = AND, addressMode =  ZP0, cycles = 3 }, new Instruction() {name = "ROL", operate = ROL, addressMode = ZP0, cycles = 5 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 5 }, new Instruction() {name = "PLP", operate = PLP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "AND", operate = AND, addressMode = IMM, cycles = 2 }, new Instruction() {name = "ROL", operate = ROL, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "BIT", operate = BIT, addressMode = ABS, cycles = 4 }, new Instruction() {name = "AND", operate = AND, addressMode = ABS, cycles = 4 }, new Instruction() {name = "ROL", operate = ROL, addressMode = ABS, cycles = 6 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 6 },
+				new Instruction() {name = "BMI", operate = BMI, addressMode = REL, cycles = 2 }, new Instruction() {name =  "AND", operate = AND, addressMode = IZY, cycles = 5 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 8 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "AND", operate = AND, addressMode =  ZPX, cycles = 4 }, new Instruction() {name = "ROL", operate = ROL, addressMode = ZPX, cycles = 6 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 6 }, new Instruction() {name = "SEC", operate = SEC, addressMode = IMP, cycles = 2 }, new Instruction() {name = "AND", operate = AND, addressMode = ABY, cycles = 4 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 7 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "AND", operate = AND, addressMode = ABX, cycles = 4 }, new Instruction() {name = "ROL", operate = ROL, addressMode = ABX, cycles = 7 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 7 },
+				new Instruction() {name = "RTI", operate = RTI, addressMode = IMP, cycles = 6 }, new Instruction() {name =  "EOR", operate = EOR, addressMode = IZX, cycles = 6 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 8 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 3 }, new Instruction() {name = "EOR", operate = EOR, addressMode =  ZP0, cycles = 3 }, new Instruction() {name = "LSR", operate = LSR, addressMode = ZP0, cycles = 5 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 5 }, new Instruction() {name = "PHA", operate = PHA, addressMode = IMP, cycles = 3 }, new Instruction() {name = "EOR", operate = EOR, addressMode = IMM, cycles = 2 }, new Instruction() {name = "LSR", operate = LSR, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "JMP", operate = JMP, addressMode = ABS, cycles = 3 }, new Instruction() {name = "EOR", operate = EOR, addressMode = ABS, cycles = 4 }, new Instruction() {name = "LSR", operate = LSR, addressMode = ABS, cycles = 6 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 6 },
+				new Instruction() {name = "BVC", operate = BVC, addressMode = REL, cycles = 2 }, new Instruction() {name =  "EOR", operate = EOR, addressMode = IZY, cycles = 5 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 8 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "EOR", operate = EOR, addressMode =  ZPX, cycles = 4 }, new Instruction() {name = "LSR", operate = LSR, addressMode = ZPX, cycles = 6 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 6 }, new Instruction() {name = "CLI", operate = CLI, addressMode = IMP, cycles = 2 }, new Instruction() {name = "EOR", operate = EOR, addressMode = ABY, cycles = 4 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 7 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "EOR", operate = EOR, addressMode = ABX, cycles = 4 }, new Instruction() {name = "LSR", operate = LSR, addressMode = ABX, cycles = 7 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 7 },
+				new Instruction() {name = "RTS", operate = RTS, addressMode = IMP, cycles = 6 }, new Instruction() {name =  "ADC", operate = ADC, addressMode = IZX, cycles = 6 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 8 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 3 }, new Instruction() {name = "ADC", operate = ADC, addressMode =  ZP0, cycles = 3 }, new Instruction() {name = "ROR", operate = ROR, addressMode = ZP0, cycles = 5 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 5 }, new Instruction() {name = "PLA", operate = PLA, addressMode = IMP, cycles = 4 }, new Instruction() {name = "ADC", operate = ADC, addressMode = IMM, cycles = 2 }, new Instruction() {name = "ROR", operate = ROR, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "JMP", operate = JMP, addressMode = IND, cycles = 5 }, new Instruction() {name = "ADC", operate = ADC, addressMode = ABS, cycles = 4 }, new Instruction() {name = "ROR", operate = ROR, addressMode = ABS, cycles = 6 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 6 },
+				new Instruction() {name = "BVS", operate = BVS, addressMode = REL, cycles = 2 }, new Instruction() {name =  "ADC", operate = ADC, addressMode = IZY, cycles = 5 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 8 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "ADC", operate = ADC, addressMode =  ZPX, cycles = 4 }, new Instruction() {name = "ROR", operate = ROR, addressMode = ZPX, cycles = 6 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 6 }, new Instruction() {name = "SEI", operate = SEI, addressMode = IMP, cycles = 2 }, new Instruction() {name = "ADC", operate = ADC, addressMode = ABY, cycles = 4 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 7 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "ADC", operate = ADC, addressMode = ABX, cycles = 4 }, new Instruction() {name = "ROR", operate = ROR, addressMode = ABX, cycles = 7 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 7 },
+				new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 2 }, new Instruction() {name =  "STA", operate = STA, addressMode = IZX, cycles = 6 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 6 }, new Instruction() {name = "STY", operate = STY, addressMode = ZP0, cycles = 3 }, new Instruction() {name = "STA", operate = STA, addressMode =  ZP0, cycles = 3 }, new Instruction() {name = "STX", operate = STX, addressMode = ZP0, cycles = 3 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 3 }, new Instruction() {name = "DEY", operate = DEY, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 2 }, new Instruction() {name = "TXA", operate = TXA, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "STY", operate = STY, addressMode = ABS, cycles = 4 }, new Instruction() {name = "STA", operate = STA, addressMode = ABS, cycles = 4 }, new Instruction() {name = "STX", operate = STX, addressMode = ABS, cycles = 4 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 4 },
+				new Instruction() {name = "BCC", operate = BCC, addressMode = REL, cycles = 2 }, new Instruction() {name =  "STA", operate = STA, addressMode = IZY, cycles = 6 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 6 }, new Instruction() {name = "STY", operate = STY, addressMode = ZPX, cycles = 4 }, new Instruction() {name = "STA", operate = STA, addressMode =  ZPX, cycles = 4 }, new Instruction() {name = "STX", operate = STX, addressMode = ZPY, cycles = 4 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 4 }, new Instruction() {name = "TYA", operate = TYA, addressMode = IMP, cycles = 2 }, new Instruction() {name = "STA", operate = STA, addressMode = ABY, cycles = 5 }, new Instruction() {name = "TXS", operate = TXS, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 5 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 5 }, new Instruction() {name = "STA", operate = STA, addressMode = ABX, cycles = 5 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 5 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 5 },
+				new Instruction() {name = "LDY", operate = LDY, addressMode = IMM, cycles = 2 }, new Instruction() {name =  "LDA", operate = LDA, addressMode = IZX, cycles = 6 }, new Instruction() {name = "LDX", operate = LDX, addressMode = IMM, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 6 }, new Instruction() {name = "LDY", operate = LDY, addressMode = ZP0, cycles = 3 }, new Instruction() {name = "LDA", operate = LDA, addressMode =  ZP0, cycles = 3 }, new Instruction() {name = "LDX", operate = LDX, addressMode = ZP0, cycles = 3 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 3 }, new Instruction() {name = "TAY", operate = TAY, addressMode = IMP, cycles = 2 }, new Instruction() {name = "LDA", operate = LDA, addressMode = IMM, cycles = 2 }, new Instruction() {name = "TAX", operate = TAX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "LDY", operate = LDY, addressMode = ABS, cycles = 4 }, new Instruction() {name = "LDA", operate = LDA, addressMode = ABS, cycles = 4 }, new Instruction() {name = "LDX", operate = LDX, addressMode = ABS, cycles = 4 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 4 },
+				new Instruction() {name = "BCS", operate = BCS, addressMode = REL, cycles = 2 }, new Instruction() {name =  "LDA", operate = LDA, addressMode = IZY, cycles = 5 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 5 }, new Instruction() {name = "LDY", operate = LDY, addressMode = ZPX, cycles = 4 }, new Instruction() {name = "LDA", operate = LDA, addressMode =  ZPX, cycles = 4 }, new Instruction() {name = "LDX", operate = LDX, addressMode = ZPY, cycles = 4 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 4 }, new Instruction() {name = "CLV", operate = CLV, addressMode = IMP, cycles = 2 }, new Instruction() {name = "LDA", operate = LDA, addressMode = ABY, cycles = 4 }, new Instruction() {name = "TSX", operate = TSX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 4 }, new Instruction() {name = "LDY", operate = LDY, addressMode = ABX, cycles = 4 }, new Instruction() {name = "LDA", operate = LDA, addressMode = ABX, cycles = 4 }, new Instruction() {name = "LDX", operate = LDX, addressMode = ABY, cycles = 4 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 4 },
+				new Instruction() {name = "CPY", operate = CPY, addressMode = IMM, cycles = 2 }, new Instruction() {name =  "CMP", operate = CMP, addressMode = IZX, cycles = 6 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 8 }, new Instruction() {name = "CPY", operate = CPY, addressMode = ZP0, cycles = 3 }, new Instruction() {name = "CMP", operate = CMP, addressMode =  ZP0, cycles = 3 }, new Instruction() {name = "DEC", operate = DEC, addressMode = ZP0, cycles = 5 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 5 }, new Instruction() {name = "INY", operate = INY, addressMode = IMP, cycles = 2 }, new Instruction() {name = "CMP", operate = CMP, addressMode = IMM, cycles = 2 }, new Instruction() {name = "DEX", operate = DEX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "CPY", operate = CPY, addressMode = ABS, cycles = 4 }, new Instruction() {name = "CMP", operate = CMP, addressMode = ABS, cycles = 4 }, new Instruction() {name = "DEC", operate = DEC, addressMode = ABS, cycles = 6 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 6 },
+				new Instruction() {name = "BNE", operate = BNE, addressMode = REL, cycles = 2 }, new Instruction() {name =  "CMP", operate = CMP, addressMode = IZY, cycles = 5 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 8 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "CMP", operate = CMP, addressMode =  ZPX, cycles = 4 }, new Instruction() {name = "DEC", operate = DEC, addressMode = ZPX, cycles = 6 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 6 }, new Instruction() {name = "CLD", operate = CLD, addressMode = IMP, cycles = 2 }, new Instruction() {name = "CMP", operate = CMP, addressMode = ABY, cycles = 4 }, new Instruction() {name = "NOP", operate = NOP, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 7 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "CMP", operate = CMP, addressMode = ABX, cycles = 4 }, new Instruction() {name = "DEC", operate = DEC, addressMode = ABX, cycles = 7 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 7 },
+				new Instruction() {name = "CPX", operate = CPX, addressMode = IMM, cycles = 2 }, new Instruction() {name =  "SBC", operate = SBC, addressMode = IZX, cycles = 6 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 8 }, new Instruction() {name = "CPX", operate = CPX, addressMode = ZP0, cycles = 3 }, new Instruction() {name = "SBC", operate = SBC, addressMode =  ZP0, cycles = 3 }, new Instruction() {name = "INC", operate = INC, addressMode = ZP0, cycles = 5 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 5 }, new Instruction() {name = "INX", operate = INX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "SBC", operate = SBC, addressMode = IMM, cycles = 2 }, new Instruction() {name = "NOP", operate = NOP, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = SBC, addressMode = IMP, cycles = 2 }, new Instruction() {name = "CPX", operate = CPX, addressMode = ABS, cycles = 4 }, new Instruction() {name = "SBC", operate = SBC, addressMode = ABS, cycles = 4 }, new Instruction() {name = "INC", operate = INC, addressMode = ABS, cycles = 6 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 6 },
+				new Instruction() {name = "BEQ", operate = BEQ, addressMode = REL, cycles = 2 }, new Instruction() {name =  "SBC", operate = SBC, addressMode = IZY, cycles = 5 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 8 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "SBC", operate = SBC, addressMode =  ZPX, cycles = 4 }, new Instruction() {name = "INC", operate = INC, addressMode = ZPX, cycles = 6 }, new Instruction() {name = "???", operate =  XXX, addressMode = IMP, cycles = 6 }, new Instruction() {name = "SED", operate = SED, addressMode = IMP, cycles = 2 }, new Instruction() {name = "SBC", operate = SBC, addressMode = ABY, cycles = 4 }, new Instruction() {name = "NOP", operate = NOP, addressMode = IMP, cycles = 2 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 7 }, new Instruction() {name = "???", operate = NOP, addressMode = IMP, cycles = 4 }, new Instruction() {name = "SBC", operate = SBC, addressMode = ABX, cycles = 4 }, new Instruction() {name = "INC", operate = INC, addressMode = ABX, cycles = 7 }, new Instruction() {name = "???", operate = XXX, addressMode = IMP, cycles = 7 }
+			};
+
 		}
 
-		//         _lookup = new List<Instruction>(){
-		//          { "BRK", BRK, IMM, 7 },{ "ORA", &a::ORA, &a::IZX, 6 },{ "???", &a::XXX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 8 },{ "???", &a::NOP, &a::IMP, 3 },{ "ORA", &a::ORA, &a::ZP0, 3 },{ "ASL", &a::ASL, &a::ZP0, 5 },{ "???", &a::XXX, &a::IMP, 5 },{ "PHP", &a::PHP, &a::IMP, 3 },{ "ORA", &a::ORA, &a::IMM, 2 },{ "ASL", &a::ASL, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 2 },{ "???", &a::NOP, &a::IMP, 4 },{ "ORA", &a::ORA, &a::ABS, 4 },{ "ASL", &a::ASL, &a::ABS, 6 },{ "???", &a::XXX, &a::IMP, 6 },
-		// { "BPL", &a::BPL, &a::REL, 2 },{ "ORA", &a::ORA, &a::IZY, 5 },{ "???", &a::XXX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 8 },{ "???", &a::NOP, &a::IMP, 4 },{ "ORA", &a::ORA, &a::ZPX, 4 },{ "ASL", &a::ASL, &a::ZPX, 6 },{ "???", &a::XXX, &a::IMP, 6 },{ "CLC", &a::CLC, &a::IMP, 2 },{ "ORA", &a::ORA, &a::ABY, 4 },{ "???", &a::NOP, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 7 },{ "???", &a::NOP, &a::IMP, 4 },{ "ORA", &a::ORA, &a::ABX, 4 },{ "ASL", &a::ASL, &a::ABX, 7 },{ "???", &a::XXX, &a::IMP, 7 },
-		// { "JSR", &a::JSR, &a::ABS, 6 },{ "AND", &a::AND, &a::IZX, 6 },{ "???", &a::XXX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 8 },{ "BIT", &a::BIT, &a::ZP0, 3 },{ "AND", &a::AND, &a::ZP0, 3 },{ "ROL", &a::ROL, &a::ZP0, 5 },{ "???", &a::XXX, &a::IMP, 5 },{ "PLP", &a::PLP, &a::IMP, 4 },{ "AND", &a::AND, &a::IMM, 2 },{ "ROL", &a::ROL, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 2 },{ "BIT", &a::BIT, &a::ABS, 4 },{ "AND", &a::AND, &a::ABS, 4 },{ "ROL", &a::ROL, &a::ABS, 6 },{ "???", &a::XXX, &a::IMP, 6 },
-		// { "BMI", &a::BMI, &a::REL, 2 },{ "AND", &a::AND, &a::IZY, 5 },{ "???", &a::XXX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 8 },{ "???", &a::NOP, &a::IMP, 4 },{ "AND", &a::AND, &a::ZPX, 4 },{ "ROL", &a::ROL, &a::ZPX, 6 },{ "???", &a::XXX, &a::IMP, 6 },{ "SEC", &a::SEC, &a::IMP, 2 },{ "AND", &a::AND, &a::ABY, 4 },{ "???", &a::NOP, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 7 },{ "???", &a::NOP, &a::IMP, 4 },{ "AND", &a::AND, &a::ABX, 4 },{ "ROL", &a::ROL, &a::ABX, 7 },{ "???", &a::XXX, &a::IMP, 7 },
-		// { "RTI", &a::RTI, &a::IMP, 6 },{ "EOR", &a::EOR, &a::IZX, 6 },{ "???", &a::XXX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 8 },{ "???", &a::NOP, &a::IMP, 3 },{ "EOR", &a::EOR, &a::ZP0, 3 },{ "LSR", &a::LSR, &a::ZP0, 5 },{ "???", &a::XXX, &a::IMP, 5 },{ "PHA", &a::PHA, &a::IMP, 3 },{ "EOR", &a::EOR, &a::IMM, 2 },{ "LSR", &a::LSR, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 2 },{ "JMP", &a::JMP, &a::ABS, 3 },{ "EOR", &a::EOR, &a::ABS, 4 },{ "LSR", &a::LSR, &a::ABS, 6 },{ "???", &a::XXX, &a::IMP, 6 },
-		// { "BVC", &a::BVC, &a::REL, 2 },{ "EOR", &a::EOR, &a::IZY, 5 },{ "???", &a::XXX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 8 },{ "???", &a::NOP, &a::IMP, 4 },{ "EOR", &a::EOR, &a::ZPX, 4 },{ "LSR", &a::LSR, &a::ZPX, 6 },{ "???", &a::XXX, &a::IMP, 6 },{ "CLI", &a::CLI, &a::IMP, 2 },{ "EOR", &a::EOR, &a::ABY, 4 },{ "???", &a::NOP, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 7 },{ "???", &a::NOP, &a::IMP, 4 },{ "EOR", &a::EOR, &a::ABX, 4 },{ "LSR", &a::LSR, &a::ABX, 7 },{ "???", &a::XXX, &a::IMP, 7 },
-		// { "RTS", &a::RTS, &a::IMP, 6 },{ "ADC", &a::ADC, &a::IZX, 6 },{ "???", &a::XXX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 8 },{ "???", &a::NOP, &a::IMP, 3 },{ "ADC", &a::ADC, &a::ZP0, 3 },{ "ROR", &a::ROR, &a::ZP0, 5 },{ "???", &a::XXX, &a::IMP, 5 },{ "PLA", &a::PLA, &a::IMP, 4 },{ "ADC", &a::ADC, &a::IMM, 2 },{ "ROR", &a::ROR, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 2 },{ "JMP", &a::JMP, &a::IND, 5 },{ "ADC", &a::ADC, &a::ABS, 4 },{ "ROR", &a::ROR, &a::ABS, 6 },{ "???", &a::XXX, &a::IMP, 6 },
-		// { "BVS", &a::BVS, &a::REL, 2 },{ "ADC", &a::ADC, &a::IZY, 5 },{ "???", &a::XXX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 8 },{ "???", &a::NOP, &a::IMP, 4 },{ "ADC", &a::ADC, &a::ZPX, 4 },{ "ROR", &a::ROR, &a::ZPX, 6 },{ "???", &a::XXX, &a::IMP, 6 },{ "SEI", &a::SEI, &a::IMP, 2 },{ "ADC", &a::ADC, &a::ABY, 4 },{ "???", &a::NOP, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 7 },{ "???", &a::NOP, &a::IMP, 4 },{ "ADC", &a::ADC, &a::ABX, 4 },{ "ROR", &a::ROR, &a::ABX, 7 },{ "???", &a::XXX, &a::IMP, 7 },
-		// { "???", &a::NOP, &a::IMP, 2 },{ "STA", &a::STA, &a::IZX, 6 },{ "???", &a::NOP, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 6 },{ "STY", &a::STY, &a::ZP0, 3 },{ "STA", &a::STA, &a::ZP0, 3 },{ "STX", &a::STX, &a::ZP0, 3 },{ "???", &a::XXX, &a::IMP, 3 },{ "DEY", &a::DEY, &a::IMP, 2 },{ "???", &a::NOP, &a::IMP, 2 },{ "TXA", &a::TXA, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 2 },{ "STY", &a::STY, &a::ABS, 4 },{ "STA", &a::STA, &a::ABS, 4 },{ "STX", &a::STX, &a::ABS, 4 },{ "???", &a::XXX, &a::IMP, 4 },
-		// { "BCC", &a::BCC, &a::REL, 2 },{ "STA", &a::STA, &a::IZY, 6 },{ "???", &a::XXX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 6 },{ "STY", &a::STY, &a::ZPX, 4 },{ "STA", &a::STA, &a::ZPX, 4 },{ "STX", &a::STX, &a::ZPY, 4 },{ "???", &a::XXX, &a::IMP, 4 },{ "TYA", &a::TYA, &a::IMP, 2 },{ "STA", &a::STA, &a::ABY, 5 },{ "TXS", &a::TXS, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 5 },{ "???", &a::NOP, &a::IMP, 5 },{ "STA", &a::STA, &a::ABX, 5 },{ "???", &a::XXX, &a::IMP, 5 },{ "???", &a::XXX, &a::IMP, 5 },
-		// { "LDY", &a::LDY, &a::IMM, 2 },{ "LDA", &a::LDA, &a::IZX, 6 },{ "LDX", &a::LDX, &a::IMM, 2 },{ "???", &a::XXX, &a::IMP, 6 },{ "LDY", &a::LDY, &a::ZP0, 3 },{ "LDA", &a::LDA, &a::ZP0, 3 },{ "LDX", &a::LDX, &a::ZP0, 3 },{ "???", &a::XXX, &a::IMP, 3 },{ "TAY", &a::TAY, &a::IMP, 2 },{ "LDA", &a::LDA, &a::IMM, 2 },{ "TAX", &a::TAX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 2 },{ "LDY", &a::LDY, &a::ABS, 4 },{ "LDA", &a::LDA, &a::ABS, 4 },{ "LDX", &a::LDX, &a::ABS, 4 },{ "???", &a::XXX, &a::IMP, 4 },
-		// { "BCS", &a::BCS, &a::REL, 2 },{ "LDA", &a::LDA, &a::IZY, 5 },{ "???", &a::XXX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 5 },{ "LDY", &a::LDY, &a::ZPX, 4 },{ "LDA", &a::LDA, &a::ZPX, 4 },{ "LDX", &a::LDX, &a::ZPY, 4 },{ "???", &a::XXX, &a::IMP, 4 },{ "CLV", &a::CLV, &a::IMP, 2 },{ "LDA", &a::LDA, &a::ABY, 4 },{ "TSX", &a::TSX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 4 },{ "LDY", &a::LDY, &a::ABX, 4 },{ "LDA", &a::LDA, &a::ABX, 4 },{ "LDX", &a::LDX, &a::ABY, 4 },{ "???", &a::XXX, &a::IMP, 4 },
-		// { "CPY", &a::CPY, &a::IMM, 2 },{ "CMP", &a::CMP, &a::IZX, 6 },{ "???", &a::NOP, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 8 },{ "CPY", &a::CPY, &a::ZP0, 3 },{ "CMP", &a::CMP, &a::ZP0, 3 },{ "DEC", &a::DEC, &a::ZP0, 5 },{ "???", &a::XXX, &a::IMP, 5 },{ "INY", &a::INY, &a::IMP, 2 },{ "CMP", &a::CMP, &a::IMM, 2 },{ "DEX", &a::DEX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 2 },{ "CPY", &a::CPY, &a::ABS, 4 },{ "CMP", &a::CMP, &a::ABS, 4 },{ "DEC", &a::DEC, &a::ABS, 6 },{ "???", &a::XXX, &a::IMP, 6 },
-		// { "BNE", &a::BNE, &a::REL, 2 },{ "CMP", &a::CMP, &a::IZY, 5 },{ "???", &a::XXX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 8 },{ "???", &a::NOP, &a::IMP, 4 },{ "CMP", &a::CMP, &a::ZPX, 4 },{ "DEC", &a::DEC, &a::ZPX, 6 },{ "???", &a::XXX, &a::IMP, 6 },{ "CLD", &a::CLD, &a::IMP, 2 },{ "CMP", &a::CMP, &a::ABY, 4 },{ "NOP", &a::NOP, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 7 },{ "???", &a::NOP, &a::IMP, 4 },{ "CMP", &a::CMP, &a::ABX, 4 },{ "DEC", &a::DEC, &a::ABX, 7 },{ "???", &a::XXX, &a::IMP, 7 },
-		// { "CPX", &a::CPX, &a::IMM, 2 },{ "SBC", &a::SBC, &a::IZX, 6 },{ "???", &a::NOP, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 8 },{ "CPX", &a::CPX, &a::ZP0, 3 },{ "SBC", &a::SBC, &a::ZP0, 3 },{ "INC", &a::INC, &a::ZP0, 5 },{ "???", &a::XXX, &a::IMP, 5 },{ "INX", &a::INX, &a::IMP, 2 },{ "SBC", &a::SBC, &a::IMM, 2 },{ "NOP", &a::NOP, &a::IMP, 2 },{ "???", &a::SBC, &a::IMP, 2 },{ "CPX", &a::CPX, &a::ABS, 4 },{ "SBC", &a::SBC, &a::ABS, 4 },{ "INC", &a::INC, &a::ABS, 6 },{ "???", &a::XXX, &a::IMP, 6 },
-		// { "BEQ", &a::BEQ, &a::REL, 2 },{ "SBC", &a::SBC, &a::IZY, 5 },{ "???", &a::XXX, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 8 },{ "???", &a::NOP, &a::IMP, 4 },{ "SBC", &a::SBC, &a::ZPX, 4 },{ "INC", &a::INC, &a::ZPX, 6 },{ "???", &a::XXX, &a::IMP, 6 },{ "SED", &a::SED, &a::IMP, 2 },{ "SBC", &a::SBC, &a::ABY, 4 },{ "NOP", &a::NOP, &a::IMP, 2 },{ "???", &a::XXX, &a::IMP, 7 },{ "???", &a::NOP, &a::IMP, 4 },{ "SBC", &a::SBC, &a::ABX, 4 },{ "INC", &a::INC, &a::ABX, 7 },{ "???", &a::XXX, &a::IMP, 7 },
-		//       }
 		public void ConnectBus(Bus bus)
 		{
 			_bus = bus;
@@ -69,383 +69,525 @@ namespace Nes
 
 		public void Clock() // Perform one clock cycle's worth of update
 		{
+			if (_cycles == 0)
+			{
+				_opcode = Read(_pc);
+				_pc++;
+				var additionalCycle1 = _instructions[_opcode].addressMode();
+				var additionalCycle2 = _instructions[_opcode].operate();
+				_cycles += (byte)(additionalCycle1 & additionalCycle2);
+			}
 
+			_cycles--;
 		}
 
 
 		/***/
 
-		public byte IMP()
+		private byte IMP()
 		{
-			return 1;
+			_fetched = _a;
+			return 0;
 		}
 
-		public byte IMM()
+		private byte IMM()
 		{
-			return 1;
+			_address_abs = _pc++;
+			return 0;
 		}
 
-		public byte ZP0()
+		private byte ZP0()
 		{
-			return 1;
+			_address_abs = Read(_pc);
+			_pc++;
+			_address_abs &= 0x00FF;
+			return 0;
 		}
 
-		public byte ZPX()
+		private byte ZPX()
 		{
-			return 1;
+			_address_abs = (ushort) (Read(_pc) + _x);
+			_pc++;
+			_address_abs &= 0x00FF;
+			return 0;		
 		}
 
-		public byte ZPY()
+		private byte ZPY()
 		{
-			return 1;
+			_address_abs = (ushort) (Read(_pc) + _y);
+			_pc++;
+			_address_abs &= 0x00FF;
+			return 0;				
 		}
 
-		public byte REL()
+		private byte REL()
 		{
-			return 1;
+			_address_rel = Read(_pc);
+			_pc++;
+			if ((_address_rel & 0x80) != 0x80)
+			{
+				_address_rel |= 0xFF00;
+			}
+			return 0;
 		}
 
-		public byte ABS()
+		private byte ABS()
 		{
-			return 1;
+			var (hi, lo, hiLo) = Read16();
+			_address_abs = hiLo;
+			return 0;
 		}
 
-		public byte ABX()
+		private byte ABX()
 		{
-			return 1;
+			var (hi, lo, hiLo) = Read16();
+			_address_abs = (ushort) (hiLo + _x);
+			return (_address_abs & 0xFF00) != (hi << 8) ? (byte) 1 : (byte) 0;
 		}
 
-		public byte ABY()
+		private byte ABY()
 		{
-			return 1;
+			return 0;
 		}
 
-		public byte IND()
+		private byte IND()
 		{
-			return 1;
+			var (hi, lo, hiLo) = Read16();
+			var hiAddress = (ushort) (hiLo + 1);
+			
+			// Simulate bug
+			if (hiLo == 0x00FF)
+			{
+				hiAddress = (ushort) (hiLo & 0xFF00);
+			}
+			
+			_address_abs = (ushort) ((Read(hiAddress) << 8) | Read(hiLo));
+			
+			return 0;
 		}
 
-		public byte IZX()
+		private byte IZX()
 		{
-			return 1;
+			var (hi, lo, hiLo) = Read16(_x);
+			_address_abs = hiLo;
+			return 0;
 		}
 
-		public byte IZY()
+		private byte IZY()
 		{
-			return 1;
+			var (hi, lo, hiLo) = Read16(0);
+			_address_abs = (ushort) (hiLo + _y);
+			return (_address_abs & 0xFF00) != (hi << 8) ? (byte) 1 : (byte) 0;		
 		}
 
 		/***/
 
 		private byte ADC()
 		{
+			Fetch();
+			var temp = _a + _fetched + GetFlag(Flags6502.C);
+			var v = ~((_a ^ _fetched) & (_a ^ temp) & 0x0080) == 1;
+			SetFlag(Flags6502.C, temp > 255);
+			SetFlag(Flags6502.Z, (temp & 0x00FF) == 0);
+			SetFlag(Flags6502.N, (temp & 0x80) == 0x80);
+			SetFlag(Flags6502.V, v);
+			_a = (byte) (temp & 0x00FF);
 			return 1;
 		}
 
 		private byte AND()
 		{
+			Fetch();
+			_a &= _fetched;
+			SetFlag(Flags6502.Z, _a == 0x00);
+			SetFlag(Flags6502.N, (_a & 0x80) == 0x80);
 			return 1;
 		}
 
 		private byte ASL()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte BCC()
-		{
-			return 1;
+		{ 
+			BranchIfClear(Flags6502.C);
+			return 0;
 		}
 
 		private byte BCS()
 		{
-			return 1;
+			BranchIfSet(Flags6502.C);
+			return 0;
 		}
 
 		private byte BEQ()
 		{
-			return 1;
+			BranchIfSet(Flags6502.Z);
+			return 0;
 		}
 
 		private byte BIT()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte BMI()
 		{
-			return 1;
+			BranchIfSet(Flags6502.N);
+			return 0;
 		}
 
 		private byte BNE()
 		{
-			return 1;
+			BranchIfClear(Flags6502.Z);
+			return 0;
 		}
 
 		private byte BPL()
 		{
-			return 1;
+			BranchIfClear(Flags6502.N);
+			return 0;
 		}
 
 		private byte BRK()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte BVC()
 		{
-			return 1;
+			BranchIfClear(Flags6502.V);
+			return 0;
 		}
 
 		private byte BVS()
 		{
-			return 1;
+			BranchIfSet(Flags6502.V);
+			return 0;
 		}
 
 		private byte CLC()
 		{
-			return 1;
+			SetFlag(Flags6502.C, false);
+			return 0;
 		}
 
 		private byte CLD()
 		{
-			return 1;
+			SetFlag(Flags6502.D, false);
+			return 0;
 		}
 
 		private byte CLI()
 		{
-			return 1;
+			SetFlag(Flags6502.I, false);
+			return 0;
 		}
 
 		private byte CLV()
 		{
-			return 1;
+			SetFlag(Flags6502.V, false);
+			return 0;
 		}
 
 		private byte CMP()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte CPX()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte CPY()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte DEC()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte DEX()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte DEY()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte EOR()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte INC()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte INX()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte INY()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte JMP()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte JSR()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte LDA()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte LDX()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte LDY()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte LSR()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte NOP()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte ORA()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte PHA()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte PHP()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte PLA()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte PLP()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte ROL()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte ROR()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte RTI()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte RTS()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte SBC()
 		{
+			Fetch();
+			var value = _fetched ^ 0x00FF;
+			var temp = _a + value + GetFlag(Flags6502.C);
+			var v = ~((_a ^ value) & (value ^ temp) & 0x0080) == 1;
+			SetFlag(Flags6502.C, (temp & 0xFF00) == 0xFF00);
+			SetFlag(Flags6502.Z, (temp & 0x00FF) == 0);
+			SetFlag(Flags6502.N, (temp & 0x80) == 0x80);
+			SetFlag(Flags6502.V, v);
+			_a = (byte) (temp & 0x00FF);
 			return 1;
 		}
 
 		private byte SEC()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte SED()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte SEI()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte STA()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte STX()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte STY()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte TAX()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte TAY()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte TSX()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte TXA()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte TXS()
 		{
-			return 1;
+			return 0;
 		}
 
 		private byte TYA()
 		{
-			return 1;
+			return 0;
 		}
 
 		// I capture all "unofficial" opcodes with this function. It is
 		// functionally identical to a NOP
 		private byte XXX()
 		{
-			return 1;
+			return 0;
 		}
 
-		public byte Read(ushort address)
+		private byte Read(ushort address)
 		{
 			return _bus.Read(address);
 		}
 
-		public void Write(ushort address, byte data)
+		private (byte hi, byte lo, ushort hiLo) Read16(byte offSetBy)
+		{
+			ushort temp = Read(_pc);
+			_pc++;
+			
+			var lo = Read((ushort) ((temp + offSetBy) & 0x00FF));
+			_pc++;
+			var hi =  Read((ushort) ((temp + offSetBy + 1) & 0xFF00));
+			_pc++;
+
+			var hiLo = (ushort) ((hi << 8) | lo);
+			return (hi, lo, hiLo);
+		}
+
+
+		private (byte hi, byte lo, ushort hiLo) Read16()
+		{
+			var lo = Read(_pc);
+			_pc++;
+			var hi = Read(_pc);
+			_pc++;
+
+			var hiLo = (ushort) ((hi << 8) | lo);
+			return (hi, lo, hiLo);
+		}
+
+		private void Write(ushort address, byte data)
 		{
 			_bus.Write(address, data);
 		}
 
-		public byte SetFlag(Flags6502 f)
+		private byte Fetch()
 		{
-			return 1;
+			if (_instructions[_opcode].addressMode != IMP)
+			{
+				_fetched = Read(_address_abs);
+			}
+
+			return _fetched;
 		}
 
-		public void GetFlag(Flags6502 f, bool v)
+		private void BranchIfSet(Flags6502 f)
 		{
+			if (GetFlag(f) != 1) return;
+			
+			_cycles++;
+			_address_abs = (ushort) (_pc + _address_rel);
+			if ((_address_abs & 0xFF00) != (_pc & 0xFF00))
+			{
+				_cycles++;
+			}
 
+			_pc = _address_abs;
+		}
+		
+		private void BranchIfClear(Flags6502 f)
+		{
+			if (GetFlag(f) != 0) return;
+			
+			_cycles++;
+			_address_abs = (ushort) (_pc + _address_rel);
+			if ((_address_abs & 0xFF00) != (_pc & 0xFF00))
+			{
+				_cycles++;
+			}
+
+			_pc = _address_abs;
+		}
+		
+
+		private void SetFlag(Flags6502 f, bool v)
+		{
+		}
+
+		private byte GetFlag(Flags6502 f)
+		{
+			return 0;
 		}
 
 
-		public enum Flags6502
+		private enum Flags6502
 		{
 			C = (1 << 0),
 			Z = (1 << 1),
@@ -457,9 +599,9 @@ namespace Nes
 			N = (1 << 7)
 		}
 
-		public struct Instruction
+		private struct Instruction
 		{
-			public Instruction(string name, Func<byte> operate, Func<byte> addressMode, byte cyles)
+			private Instruction(string name, Func<byte> operate, Func<byte> addressMode, byte cyles)
 			{
 				this.name = name;
 				this.operate = operate;
