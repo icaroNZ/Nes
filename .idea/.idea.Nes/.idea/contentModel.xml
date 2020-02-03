@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\IcaroLavrador\.Rider2019.3\config\consoles\db" t="IncludeRecursive" />
-    <e p="C:\Users\IcaroLavrador\.Rider2019.3\config\extensions" t="IncludeRecursive" />
-    <e p="C:\Users\IcaroLavrador\.Rider2019.3\config\scratches" t="IncludeRecursive" />
-    <e p="C:\Users\IcaroLavrador\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\IcaroLavrador\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Nes.1392858607.00" t="ExcludeRecursive" />
-    <e p="C:\Users\IcaroLavrador\Documents\Proj\Nes" t="IncludeFlat">
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="Nes" t="IncludeRecursive">
         <e p="bin" t="ExcludeRecursive" />
         <e p="Bus.cs" t="Include" />
+        <e p="Cartridge.cs" t="Include" />
+        <e p="CPU6502.cs" t="Include" />
+        <e p="Demo_6502.cs" t="Include" />
+        <e p="Helper.cs" t="Include" />
+        <e p="Mapper.cs" t="Include" />
+        <e p="Mapper_000.cs" t="Include" />
         <e p="Nes.csproj" t="IncludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -18,11 +19,16 @@
             </e>
           </e>
         </e>
-        <e p="Olc6502.cs" t="Include" />
+        <e p="PPU2c02.cs" t="Include" />
         <e p="Program.cs" t="Include" />
+        <e p="Super Mario Bros.nes" t="Include" />
       </e>
       <e p="Nes.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
     </e>
+    <e p="$USER_HOME$/Library/Caches/Rider2019.3/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2019.3/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_Nes.-74099585.00" t="ExcludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
   </component>
 </project>

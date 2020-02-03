@@ -1,21 +1,19 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "C:\\Users\\IcaroLavrador\\Documents\\Proj\\Nes\\Nes\\Nes.csproj",
+    "projectUniqueName": "/Users/icaro/Documents/Nes Emulator/Nes/Nes/Nes.csproj",
     "projectName": "Nes",
-    "projectPath": "C:\\Users\\IcaroLavrador\\Documents\\Proj\\Nes\\Nes\\Nes.csproj",
-    "outputPath": "C:\\Users\\IcaroLavrador\\Documents\\Proj\\Nes\\Nes\\obj\\",
+    "projectPath": "/Users/icaro/Documents/Nes Emulator/Nes/Nes/Nes.csproj",
+    "outputPath": "/Users/icaro/Documents/Nes Emulator/Nes/Nes/obj/",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
     ],
     "originalTargetFrameworks": [
       "netcoreapp3.1"
     ],
     "sources": {
-      "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-      "https://api.nuget.org/v3/index.json": {},
-      "https://pkgs.dev.azure.com/partpay-nz/_packaging/partpay.packages/nuget/v3/index.json": {}
+      "https://api.nuget.org/v3/index.json": {}
     },
     "frameworks": {
       "netcoreapp3.1": {
@@ -45,7 +43,7 @@
           "privateAssets": "all"
         }
       },
-      "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+      "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.100/RuntimeIdentifierGraph.json"
     }
   }
 }

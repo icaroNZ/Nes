@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace Nes
 {
-	public class Olc6502
+	public class CPU6502
 	{
 		private Bus _bus;
 
 		private byte _a = 0x00; // Accumulator
 		private byte _x = 0x00; // X Register
 		private byte _y = 0x00; // U Register
-		private byte stackPointer = 0x00; //Stack Pointer
+		private byte _stackPointer = 0x00; //Stack Pointer
 		private byte _status = 0x00; // Status Register
 		private ushort _pc = 0x0000; //Program Counter
 
@@ -24,7 +24,7 @@ namespace Nes
 
 		private List<Instruction> _instructions;
 
-		public Olc6502()
+		public CPU6502()
 		{ 
 			_instructions = new List<Instruction>()
 			{
@@ -55,16 +55,67 @@ namespace Nes
 
 		public void Reset() // Reset Interrupt - Forces CPU into known state
 		{
+			_pc = 0xFFFC;
+			var (hi, li, hiLo) = Read16();
+			_pc = hiLo;
+
+			
+			_a = 0;
+			_x = 0;
+			_y = 0;
+			_stackPointer = 0xFD;
+			_status = (byte) (0x00 | GetFlag(Flags6502.U)); //??????????????
+
+			//var (hi, li, hiLo) = Read16();
+			_address_abs = 0x0000;
+			_address_rel = 0x0000;
+			_fetched = 0x00;
+			_cycles = 8;
 		}
 
 		public void Irq() // Interrupt Request - Executes an instruction at a specific location
 		{
+			if (GetFlag(Flags6502.I) != 0x00) return;
+			
+			Write(((ushort) (0x1000 + _stackPointer)), (byte) (_pc >> 8 & 0x00FF));
+			_stackPointer--;
+			Write(((ushort) (0x1000 + _stackPointer)), (byte) (_pc & 0x00FF));
+			_stackPointer--;
+				
+			SetFlag(Flags6502.B, false);
+			SetFlag(Flags6502.U, true);
+			SetFlag(Flags6502.I, true);
+				
+			Write(((ushort) (0x1000 + _stackPointer)), _status);
+			_status--;
 
+			_pc = 0xFFFE;
+			var (hi, li, hiLo) = Read16();
+			_pc = hiLo;
+
+			_cycles = 7;
 		}
 
 		public void Nmi() // Non-Maskable Interrupt Request - As above, but cannot be disabled
 		{
+			
+				Write(((ushort) (0x1000 + _stackPointer)), (byte) (_pc >> 8 & 0x00FF));
+				_stackPointer--;
+				Write(((ushort) (0x1000 + _stackPointer)), (byte) (_pc & 0x00FF));
+				_stackPointer--;
+				
+				SetFlag(Flags6502.B, false);
+				SetFlag(Flags6502.U, true);
+				SetFlag(Flags6502.I, true);
+				
+				Write(((ushort) (0x1000 + _stackPointer)), _status);
+				_status--;
 
+				_pc = 0xFFFA;
+				var (hi, li, hiLo) = Read16();
+				_pc = hiLo;
+
+				_cycles = 8;
 		}
 
 		public void Clock() // Perform one clock cycle's worth of update
@@ -72,13 +123,24 @@ namespace Nes
 			if (_cycles == 0)
 			{
 				_opcode = Read(_pc);
+				SetFlag(Flags6502.U, true);
 				_pc++;
+				Console.WriteLine(_instructions[_opcode].name);
 				var additionalCycle1 = _instructions[_opcode].addressMode();
 				var additionalCycle2 = _instructions[_opcode].operate();
 				_cycles += (byte)(additionalCycle1 & additionalCycle2);
+				SetFlag(Flags6502.U, true);
+				Console.WriteLine(
+					"A: " + _a.ToString() + 
+					" | X: " + _x.ToString() + 
+					" | Y: " + _y.ToString() +
+					" | Status: " + Convert.ToString(_status, 2));
+				Console.WriteLine("Ram: " + _bus.CpuRam[0x0000] + " " + _bus.CpuRam[0x0001]+ " " + _bus.CpuRam[0x0002]+ " " + _bus.CpuRam[0x0004]);
 			}
 
 			_cycles--;
+			
+
 		}
 
 
@@ -147,7 +209,9 @@ namespace Nes
 
 		private byte ABY()
 		{
-			return 0;
+			var (hi, lo, hiLo) = Read16();
+			_address_abs = (ushort) (hiLo + _y);
+			return (_address_abs & 0xFF00) != (hi << 8) ? (byte) 1 : (byte) 0;		
 		}
 
 		private byte IND()
@@ -206,6 +270,16 @@ namespace Nes
 
 		private byte ASL()
 		{
+			Fetch();
+			var temp = _fetched << 1;
+			SetFlag(Flags6502.C, (temp & 0xFF00) > 0);
+			SetFlag(Flags6502.Z, (temp & 0x00FF) == 0x00);
+			SetFlag(Flags6502.N, (temp & 0x80) == 0x80);
+			var value = (byte) (temp & 0x00FF);
+			if (_instructions[_opcode].addressMode == IMP)
+				_a = value;
+			else
+				Write(_address_abs, value);
 			return 0;
 		}
 
@@ -252,6 +326,20 @@ namespace Nes
 
 		private byte BRK()
 		{
+			_pc++;
+	
+			SetFlag(Flags6502.I, true);
+			Write((ushort) (0x0100 + _stackPointer), (byte) ((_pc >> 8) & 0x00FF));
+			_stackPointer--;
+			Write((ushort) (0x0100 + _stackPointer), (byte) (_pc & 0x00FF));
+			_stackPointer--;
+
+			SetFlag(Flags6502.B, true);
+			Write((ushort) (0x0100 + _stackPointer), _status);
+			_stackPointer--;
+			SetFlag(Flags6502.B, false);
+
+			_pc = (ushort) (Read(0xFFFE) | Read(0xFFFF) << 8);
 			return 0;
 		}
 
@@ -293,77 +381,137 @@ namespace Nes
 
 		private byte CMP()
 		{
-			return 0;
+			Fetch();
+			var temp = _a - _fetched;
+			SetFlag(Flags6502.C, _a >= _fetched);
+			SetFlag(Flags6502.Z, (temp & 0x00FF) == 0x0000);
+			SetFlag(Flags6502.N, (temp & 0x0080) == 0x0080);
+			return 1;
 		}
 
 		private byte CPX()
 		{
+			Fetch();
+			var temp = _x - _fetched;
+			SetFlag(Flags6502.C, _x >= _fetched);
+			SetFlag(Flags6502.Z, (temp & 0x00FF) == 0x0000);
+			SetFlag(Flags6502.N, (temp & 0x0080) == 0x0080);
 			return 0;
 		}
 
 		private byte CPY()
 		{
+			Fetch();
+			var temp = _y - _fetched;
+			SetFlag(Flags6502.C, _y >= _fetched);
+			SetFlag(Flags6502.Z, (temp & 0x00FF) == 0x0000);
+			SetFlag(Flags6502.N, (temp & 0x0080) == 0x0080);
 			return 0;
 		}
 
 		private byte DEC()
 		{
-			return 0;
-		}
+			Fetch();
+			var temp = _fetched - 1;
+			Write(_address_abs, (byte) (temp & 0x00FF));
+			SetFlag(Flags6502.Z, (temp & 0x00FF) == 0x0000);
+			SetFlag(Flags6502.N, (temp & 0x0080) == 0x0080);
+			return 0;		}
 
 		private byte DEX()
 		{
+			_x--;
+			SetFlag(Flags6502.Z, _x == 0x00);
+			SetFlag(Flags6502.N, (_x & 0x80) == 0x0080);
 			return 0;
 		}
 
 		private byte DEY()
 		{
+			_y--;
+			SetFlag(Flags6502.Z, _y == 0x00);
+			SetFlag(Flags6502.N, (_y & 0x80) == 0x0080);
 			return 0;
 		}
 
 		private byte EOR()
 		{
-			return 0;
+			Fetch();
+			_a = (byte) (_a ^ _fetched);	
+			SetFlag(Flags6502.Z, _a == 0x00);
+			SetFlag(Flags6502.N, (_a & 0x80) == 0x0080);
+			return 1;		
 		}
 
 		private byte INC()
 		{
-			return 0;
-		}
+			Fetch();
+			var temp = _fetched + 1;
+			Write(_address_abs, (byte) (temp & 0x00FF));
+			SetFlag(Flags6502.Z, (temp & 0x00FF) == 0x0000);
+			SetFlag(Flags6502.N, (temp & 0x0080) == 0x0080);
+			return 0;		}
 
 		private byte INX()
 		{
-			return 0;
+			_x++;
+			SetFlag(Flags6502.Z, _x == 0x00);
+			SetFlag(Flags6502.N, (_x & 0x80) ==0x0080);
+			return 0;		
 		}
 
 		private byte INY()
 		{
+			_y++;
+			SetFlag(Flags6502.Z, _y == 0x00);
+			SetFlag(Flags6502.N, (_y & 0x80) == 0x0080);
 			return 0;
 		}
 
 		private byte JMP()
 		{
+			_pc = _address_abs;
 			return 0;
 		}
 
 		private byte JSR()
 		{
+			_pc--;
+
+			Write((ushort) (0x0100 + _stackPointer), (byte) ((_pc >> 8) & 0x00FF));
+			_stackPointer--;
+			Write((ushort) (0x0100 + _stackPointer), (byte) (_pc & 0x00FF));
+			_stackPointer--;
+
+			_pc = _address_abs;
 			return 0;
 		}
 
 		private byte LDA()
 		{
-			return 0;
+			Fetch();
+			_a = _fetched;
+			SetFlag(Flags6502.Z, _a == 0x00);
+			SetFlag(Flags6502.N, (_a & 0x80) == 0x0080);
+			return 1;
 		}
 
 		private byte LDX()
 		{
-			return 0;
+			Fetch();
+			_x = _fetched;
+			SetFlag(Flags6502.Z, _x == 0x00);
+			SetFlag(Flags6502.B, (_x & 0x80) == 0x0080);
+			return 1;		
 		}
 
 		private byte LDY()
 		{
-			return 0;
+			Fetch();
+			_y = _fetched;
+			SetFlag(Flags6502.Z, _y == 0x00);
+			SetFlag(Flags6502.B, (_y & 0x80) == 0x0080);
+			return 1;	
 		}
 
 		private byte LSR()
@@ -383,7 +531,9 @@ namespace Nes
 
 		private byte PHA()
 		{
-			return 0;
+			Write((ushort) (0x0100 + _stackPointer), _a);
+			_stackPointer--;
+			return 0;		
 		}
 
 		private byte PHP()
@@ -393,6 +543,10 @@ namespace Nes
 
 		private byte PLA()
 		{
+			_stackPointer++;
+			_a = Read((ushort) (0x0100 + _stackPointer));
+			SetFlag(Flags6502.Z, _a == 0x00);
+			SetFlag(Flags6502.N, (_a & 0x80) == 0x80);
 			return 0;
 		}
 
@@ -413,6 +567,15 @@ namespace Nes
 
 		private byte RTI()
 		{
+			_stackPointer++;
+			_status = Read((ushort) (0x0100 + _stackPointer));
+			_status &= unchecked((byte) ~Flags6502.B); //????????
+			_status &= unchecked((byte) ~Flags6502.U); //????????
+
+			_stackPointer++;
+			_pc = Read((ushort) (0x0100 + _stackPointer));
+			_stackPointer++;
+			_pc |= (ushort) (Read((ushort) (0x0100 + _stackPointer)) << 8);
 			return 0;
 		}
 
@@ -457,6 +620,7 @@ namespace Nes
 
 		private byte STX()
 		{
+			Write(_address_abs, _x);
 			return 0;
 		}
 
@@ -504,7 +668,7 @@ namespace Nes
 
 		private byte Read(ushort address)
 		{
-			return _bus.Read(address);
+			return _bus.CpuRead(address);
 		}
 
 		private (byte hi, byte lo, ushort hiLo) Read16(byte offSetBy)
@@ -535,7 +699,7 @@ namespace Nes
 
 		private void Write(ushort address, byte data)
 		{
-			_bus.Write(address, data);
+			_bus.CpuWrite(address, data);
 		}
 
 		private byte Fetch()
@@ -561,6 +725,11 @@ namespace Nes
 
 			_pc = _address_abs;
 		}
+
+		public bool Complete()
+		{
+			return _cycles == 0;
+		}
 		
 		private void BranchIfClear(Flags6502 f)
 		{
@@ -579,11 +748,19 @@ namespace Nes
 
 		private void SetFlag(Flags6502 f, bool v)
 		{
+			if (v)
+			{
+				_status |= (byte) f;
+			}
+			else
+			{
+				_status &= (byte) ~f;
+			}
 		}
 
 		private byte GetFlag(Flags6502 f)
 		{
-			return 0;
+			return (byte) ((_status & (byte)f) == 1 ? 1 : 0);
 		}
 
 
@@ -613,6 +790,119 @@ namespace Nes
 			public Func<byte> operate;
 			public Func<byte> addressMode;
 			public byte cycles;
+		}
+
+		public Dictionary<ushort, string> Disassemble(ushort start, ushort stop)
+		{
+			var address =  start;
+			byte value, hi, lo = 0x00;
+			var lineAddress = 0;
+			var mapLines = new Dictionary<ushort, string>();
+			var max = -1;
+			while (address <= stop - 1)
+			{
+				if (max < address)
+				{
+					max = address;
+				}
+				else
+				{
+					break;
+				}
+
+				lineAddress = address;
+				var inst = "$" + Convert.ToString(address, 16) + ":";
+				var opcode = _bus.CpuRead(address, true);
+				address++;
+				inst += _instructions[opcode].name + " ";
+				Console.WriteLine(_instructions[opcode].name);
+				if (_instructions[opcode].addressMode == IMP)
+				{
+					inst += " {IMP}";
+				}
+				else if (_instructions[opcode].addressMode == IMM)
+				{
+					value = _bus.CpuRead(address, true); 
+					address++;
+					inst += "#$" + Convert.ToString(value, 16) + " {IMM}";
+				}
+				else if (_instructions[opcode].addressMode == ZP0)
+				{
+					lo = _bus.CpuRead(address, true); 
+					address++;
+					hi = 0x00;												
+					inst += "$" + Convert.ToString(lo, 16) + " {ZP0}";
+				}
+				else if (_instructions[opcode].addressMode == ZPX)
+				{
+					lo = _bus.CpuRead(address, true); 
+					address++;
+					hi = 0x00;														
+					inst += "$" + Convert.ToString(lo, 16) + ", X {ZPX}";
+				}
+				else if (_instructions[opcode].addressMode == ZPY)
+				{
+					lo = _bus.CpuRead(address, true); 
+					address++;
+					hi = 0x00;														
+					inst += "$" + Convert.ToString(lo, 16) + ", Y {ZPY}";
+				}
+				else if (_instructions[opcode].addressMode == IZX)
+				{
+					lo = _bus.CpuRead(address, true); 
+					address++;
+					hi = 0x00;								
+					inst += "($" + Convert.ToString(lo, 16) + ", X) {IZX}";
+				}
+				else if (_instructions[opcode].addressMode == IZY)
+				{
+					lo = _bus.CpuRead(address, true); 
+					address++;
+					hi = 0x00;								
+					inst += "($" + Convert.ToString(lo, 16) + "), Y {IZY}";
+				}
+				else if (_instructions[opcode].addressMode == ABS)
+				{
+					lo = _bus.CpuRead(address, true); 
+					address++;
+					hi = _bus.CpuRead(address, true); 
+					address++;
+					inst += "$" + Convert.ToString((hi << 8) | lo, 16) + " {ABS}";
+				}
+				else if (_instructions[opcode].addressMode == ABX)
+				{
+					lo = _bus.CpuRead(address, true); 
+					address++;
+					hi = _bus.CpuRead(address, true); 
+					address++;
+					inst += "$" + Convert.ToString((hi << 8) | lo, 16) + ", X {ABX}";
+				}
+				else if (_instructions[opcode].addressMode == ABY)
+				{
+					lo = _bus.CpuRead(address, true); 
+					address++;
+					hi = _bus.CpuRead(address, true); 
+					address++;
+					inst += "$" + Convert.ToString((hi << 8) | lo, 16)+ ", Y {ABY}";
+				}
+				else if (_instructions[opcode].addressMode == IND)
+				{
+					lo = _bus.CpuRead(address, true); 
+					address++;
+					hi = _bus.CpuRead(address, true); 
+					address++;
+					inst += "($" + Convert.ToString((hi << 8) | lo, 16) + ") {IND}";
+				}
+				else if (_instructions[opcode].addressMode == REL)
+				{
+					value = _bus.CpuRead(address, true); 
+					address++;
+					inst += "$" + Convert.ToString(value, 16) + " [$" + Convert.ToString(address + value, 16) + "] {REL}";
+				}
+				mapLines[(ushort) (lineAddress)] = inst;
+			}
+
+			return mapLines;
 		}
 	}
 }

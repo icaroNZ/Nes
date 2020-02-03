@@ -2,10 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59eace2c-df51-4013-bcd9-ecd81db9148a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.Nes/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Nes/Cartridge.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Nes/Demo_6502.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Nes/Helper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Nes/Mapper.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Nes/Mapper_000.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Nes/PPU2c02.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Nes/Super Mario Bros.nes" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Nes/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Nes/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Nes/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Nes/.idea/indexLayout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Nes/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Nes/.idea/projectSettingsUpdater.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Nes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Nes/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Nes/Olc6502.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/Olc6502.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Nes/riderModule.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nes/Bus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/Bus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nes/Nes.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/Nes.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nes/Olc6502.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/CPU6502.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nes/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nes/obj/Nes.csproj.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/obj/Nes.csproj.nuget.cache" afterDir="false" />
@@ -19,24 +33,67 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Nes/Olc6502.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Nes/Bus.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Nes/Demo_6502.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Nes/Program.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/3A4/List.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2050C92A-D081-4D01-836E-66C4768FC8A5/9d/ecbca757/Func`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Nes/PPU2c02.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Nes/Cartridge.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/CD/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Nes/Helper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/d4/2e9da79c/Sprite.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Nes/CPU6502.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Nes/Bus.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/A2/Number.Parsing.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Nes/Mapper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/1/Interop.IOErrors.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Nes/Mapper_000.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/63/Convert.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Nes/Program.cs" />
-        <option value="$PROJECT_DIR$/Nes/Bus.cs" />
+        <option value="$PROJECT_DIR$/Nes/2c02.cs" />
         <option value="$PROJECT_DIR$/Nes/Olc6502.cs" />
+        <option value="$PROJECT_DIR$/Nes/Mapper0.cs" />
+        <option value="$PROJECT_DIR$/Nes/Helper.cs" />
+        <option value="$PROJECT_DIR$/Nes/Demo_6502.cs" />
+        <option value="$PROJECT_DIR$/Nes/PPU2c02.cs" />
+        <option value="$PROJECT_DIR$/Nes/Mapper.cs" />
+        <option value="$PROJECT_DIR$/Nes/Bus.cs" />
+        <option value="$PROJECT_DIR$/Nes/Mapper_000.cs" />
+        <option value="$PROJECT_DIR$/Nes/Program.cs" />
+        <option value="$PROJECT_DIR$/Nes/CPU6502.cs" />
+        <option value="$PROJECT_DIR$/Nes/Cartridge.cs" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1X6iDN5dLmsm0p0dN9xjwuZNobL" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollToSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -116,37 +173,201 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="WindowStateProjectService">
+    <state width="624" height="466" key="DebuggerActiveHint" timestamp="1580590625589">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="624" height="466" key="DebuggerActiveHint/0.23.1920.1124@0.23.1920.1124" timestamp="1580590625589" />
+    <state x="1132" y="213" key="ExperimentsDialog" timestamp="1580712282060">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state x="1132" y="213" key="ExperimentsDialog/0.23.1920.1124@0.23.1920.1124" timestamp="1580712282060" />
+    <state width="1036" height="334" key="GridCell.Tab.0.bottom" timestamp="1580723853971">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.0.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853971" />
+    <state width="1036" height="334" key="GridCell.Tab.0.center" timestamp="1580723853971">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.0.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853971" />
+    <state width="1036" height="334" key="GridCell.Tab.0.left" timestamp="1580723853970">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.0.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853970" />
+    <state width="1036" height="334" key="GridCell.Tab.0.right" timestamp="1580723853971">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.0.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853971" />
+    <state width="1036" height="334" key="GridCell.Tab.1.bottom" timestamp="1580723853973">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.1.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853973" />
+    <state width="1036" height="334" key="GridCell.Tab.1.center" timestamp="1580723853972">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.1.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853972" />
+    <state width="1036" height="334" key="GridCell.Tab.1.left" timestamp="1580723853972">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.1.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853972" />
+    <state width="1036" height="334" key="GridCell.Tab.1.right" timestamp="1580723853972">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.1.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853972" />
+    <state width="1036" height="334" key="GridCell.Tab.2.bottom" timestamp="1580723853974">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.2.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853974" />
+    <state width="1036" height="334" key="GridCell.Tab.2.center" timestamp="1580723853973">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.2.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853973" />
+    <state width="1036" height="334" key="GridCell.Tab.2.left" timestamp="1580723853973">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.2.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853973" />
+    <state width="1036" height="334" key="GridCell.Tab.2.right" timestamp="1580723853974">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.2.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853974" />
+    <state width="1036" height="334" key="GridCell.Tab.3.bottom" timestamp="1580723853976">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.3.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853976" />
+    <state width="1036" height="334" key="GridCell.Tab.3.center" timestamp="1580723853975">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.3.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853975" />
+    <state width="1036" height="334" key="GridCell.Tab.3.left" timestamp="1580723853975">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.3.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853975" />
+    <state width="1036" height="334" key="GridCell.Tab.3.right" timestamp="1580723853975">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.3.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853975" />
+    <state width="1036" height="334" key="GridCell.Tab.4.bottom" timestamp="1580723853977">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.4.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853977" />
+    <state width="1036" height="334" key="GridCell.Tab.4.center" timestamp="1580723853977">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.4.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853977" />
+    <state width="1036" height="334" key="GridCell.Tab.4.left" timestamp="1580723853976">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.4.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853976" />
+    <state width="1036" height="334" key="GridCell.Tab.4.right" timestamp="1580723853977">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state width="1036" height="334" key="GridCell.Tab.4.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580723853977" />
     <state x="891" y="167" key="Rider.ProjectTemplateDialog.Size" timestamp="1580372825109">
       <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state x="891" y="167" key="Rider.ProjectTemplateDialog.Size/0.23.1920.1124@0.23.1920.1124" timestamp="1580372825109" />
-    <state x="446" y="144" width="644" height="536" key="find.popup" timestamp="1580438522874">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="823" y="162" key="SettingsEditor" timestamp="1580523980082">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state x="823" y="162" key="SettingsEditor/0.23.1920.1124@0.23.1920.1124" timestamp="1580523980082" />
+    <state x="558" y="219" width="805" height="732" key="find.popup" timestamp="1580539698867">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state x="446" y="144" width="644" height="536" key="find.popup/0.0.1536.824/-2560.0.2560.1400@0.0.1536.824" timestamp="1580438522874" />
+    <state x="558" y="219" width="805" height="732" key="find.popup/0.23.1920.1124@0.23.1920.1124" timestamp="1580539698867" />
+    <state x="1033" y="242" width="672" height="678" key="search.everywhere.popup" timestamp="1580723731412">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state x="1033" y="242" width="672" height="678" key="search.everywhere.popup/0.23.1920.1124@0.23.1920.1124" timestamp="1580723731412" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Nes/Bus.cs</url>
-          <line>11</line>
-          <properties documentPath="$PROJECT_DIR$/Nes/Bus.cs" initialLine="10">
+          <url>file://$PROJECT_DIR$/Nes/CPU6502.cs</url>
+          <line>313</line>
+          <properties documentPath="$PROJECT_DIR$/Nes/Olc6502.cs" initialLine="313">
             <startOffsets>
-              <option value="192" />
+              <option value="26874" />
             </startOffsets>
             <endOffsets>
-              <option value="193" />
+              <option value="26901" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Nes/CPU6502.cs</url>
+          <line>124</line>
+          <properties documentPath="$PROJECT_DIR$/Nes/CPU6502.cs" initialLine="121">
+            <startOffsets>
+              <option value="23263" />
+            </startOffsets>
+            <endOffsets>
+              <option value="23283" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Nes/CPU6502.cs</url>
+          <line>129</line>
+          <properties documentPath="$PROJECT_DIR$/Nes/CPU6502.cs" initialLine="126">
+            <startOffsets>
+              <option value="23448" />
+            </startOffsets>
+            <endOffsets>
+              <option value="23504" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Nes/CPU6502.cs</url>
+          <line>690</line>
+          <properties documentPath="$PROJECT_DIR$/Nes/CPU6502.cs" initialLine="687">
+            <startOffsets>
+              <option value="33180" />
+            </startOffsets>
+            <endOffsets>
+              <option value="33199" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Nes/Cartridge.cs</url>
+          <line>33</line>
+          <properties documentPath="$PROJECT_DIR$/Nes/Cartridge.cs" initialLine="33">
+            <startOffsets>
+              <option value="1009" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1028" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="66" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Nes/CPU6502.cs</url>
+          <line>57</line>
+          <properties documentPath="$PROJECT_DIR$/Nes/CPU6502.cs" initialLine="57">
+            <startOffsets>
+              <option value="21692" />
+            </startOffsets>
+            <endOffsets>
+              <option value="21702" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="67" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
