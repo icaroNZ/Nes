@@ -273,6 +273,7 @@ namespace Nes
     }
 }
 
+
 public struct Control
 {
 	public byte reg;

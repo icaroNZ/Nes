@@ -6,6 +6,7 @@ namespace Nes
 	public class CPU6502
 	{
 		private Bus _bus;
+		private Dictionary<ushort, string>  _mapLines = new Dictionary<ushort, string>();
 
 		private byte _a = 0x00; // Accumulator
 		private byte _x = 0x00; // X Register
@@ -123,18 +124,22 @@ namespace Nes
 			if (_cycles == 0)
 			{
 				_opcode = Read(_pc);
-				SetFlag(Flags6502.U, true);
+				Console.WriteLine(_mapLines[_pc]);
+				//SetFlag(Flags6502.U, true);
 				_pc++;
 				Console.WriteLine(_instructions[_opcode].name);
 				var additionalCycle1 = _instructions[_opcode].addressMode();
 				var additionalCycle2 = _instructions[_opcode].operate();
 				_cycles += (byte)(additionalCycle1 & additionalCycle2);
-				SetFlag(Flags6502.U, true);
+				//SetFlag(Flags6502.U, true);
 				Console.WriteLine(
 					"A: " + _a.ToString() + 
 					" | X: " + _x.ToString() + 
 					" | Y: " + _y.ToString() +
-					" | Status: " + Convert.ToString(_status, 2));
+					" | Status: " + Convert.ToString(_status, 2) +
+					" | PC: " + Convert.ToString(_pc, 16) +
+					" | Add: " + Convert.ToString(_address_abs, 16) +
+					" | SP: " + Convert.ToString(_stackPointer, 16));
 				Console.WriteLine("Ram: " + _bus.CpuRam[0x0000] + " " + _bus.CpuRam[0x0001]+ " " + _bus.CpuRam[0x0002]+ " " + _bus.CpuRam[0x0004]);
 			}
 
@@ -510,7 +515,7 @@ namespace Nes
 			Fetch();
 			_y = _fetched;
 			SetFlag(Flags6502.Z, _y == 0x00);
-			SetFlag(Flags6502.B, (_y & 0x80) == 0x0080);
+			SetFlag(Flags6502.N, (_y & 0x80) == 0x0080);
 			return 1;	
 		}
 
@@ -600,21 +605,25 @@ namespace Nes
 
 		private byte SEC()
 		{
+			SetFlag(Flags6502.C, true);
 			return 0;
 		}
 
 		private byte SED()
 		{
-			return 0;
+			SetFlag(Flags6502.D, true);
+			return 0;		
 		}
 
 		private byte SEI()
 		{
+			SetFlag(Flags6502.I, true);
 			return 0;
 		}
 
 		private byte STA()
 		{
+			Write(_address_abs, _x);
 			return 0;
 		}
 
@@ -651,6 +660,7 @@ namespace Nes
 
 		private byte TXS()
 		{
+			_stackPointer = _x;
 			return 0;
 		}
 
@@ -736,7 +746,16 @@ namespace Nes
 			if (GetFlag(f) != 0) return;
 			
 			_cycles++;
-			_address_abs = (ushort) (_pc + _address_rel);
+			if ((_address_rel & 0x80) == 0x80)
+			{
+				_address_abs = (ushort) (_pc - (_address_rel & 0x7F));
+			}
+			else
+			{
+				_address_abs = (ushort) (_pc + (_address_rel & 0x7F));
+
+			}
+
 			if ((_address_abs & 0xFF00) != (_pc & 0xFF00))
 			{
 				_cycles++;
@@ -772,8 +791,8 @@ namespace Nes
 			D = (1 << 3),
 			B = (1 << 4),
 			U = (1 << 5),
-			V = (1 << 6),
-			N = (1 << 7)
+			V = (1 << 6), //Overflow
+			N = (1 << 7) //Negattive
 		}
 
 		private struct Instruction
@@ -797,7 +816,6 @@ namespace Nes
 			var address =  start;
 			byte value, hi, lo = 0x00;
 			var lineAddress = 0;
-			var mapLines = new Dictionary<ushort, string>();
 			var max = -1;
 			while (address <= stop - 1)
 			{
@@ -899,10 +917,10 @@ namespace Nes
 					address++;
 					inst += "$" + Convert.ToString(value, 16) + " [$" + Convert.ToString(address + value, 16) + "] {REL}";
 				}
-				mapLines[(ushort) (lineAddress)] = inst;
+				_mapLines[(ushort) (lineAddress)] = inst;
 			}
 
-			return mapLines;
+			return _mapLines;
 		}
 	}
 }
