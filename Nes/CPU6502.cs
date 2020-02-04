@@ -186,7 +186,7 @@ namespace Nes
 		{
 			_address_rel = Read(_pc);
 			_pc++;
-			if ((_address_rel & 0x80) != 0x80)
+			if ((_address_rel & 0x80) == 0x80)
 			{
 				_address_rel |= 0xFF00;
 			}

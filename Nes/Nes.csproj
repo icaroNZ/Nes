@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
@@ -6,6 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Reference Include="ConsoleGameEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+        <HintPath>ConsoleGameEngine\ConsoleGameEngine.dll</HintPath>
+      </Reference>
       <Reference Include="PixelEngine, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
         <HintPath>..\Pixel-Engine-master\Libraries\PixelEngine.dll</HintPath>
       </Reference>

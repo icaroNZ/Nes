@@ -1,7 +1,6 @@
-using System;
-using System.ComponentModel;
-using System.Runtime.InteropServices;
+
 using PixelEngine;
+
 namespace Nes
 {
     public class PPU2c02
