@@ -1,29 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/Users/icaro/Documents/Nes Emulator/Nes/Nes/Nes.csproj": {}
+    "C:\\Users\\IcaroLavrador\\Documents\\Proj\\Nes\\Nes\\Nes.csproj": {}
   },
   "projects": {
-    "/Users/icaro/Documents/Nes Emulator/Nes/Nes/Nes.csproj": {
+    "C:\\Users\\IcaroLavrador\\Documents\\Proj\\Nes\\Nes\\Nes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/icaro/Documents/Nes Emulator/Nes/Nes/Nes.csproj",
+        "projectUniqueName": "C:\\Users\\IcaroLavrador\\Documents\\Proj\\Nes\\Nes\\Nes.csproj",
         "projectName": "Nes",
-        "projectPath": "/Users/icaro/Documents/Nes Emulator/Nes/Nes/Nes.csproj",
-        "packagesPath": "/Users/icaro/.nuget/packages/",
-        "outputPath": "/Users/icaro/Documents/Nes Emulator/Nes/Nes/obj/",
+        "projectPath": "C:\\Users\\IcaroLavrador\\Documents\\Proj\\Nes\\Nes\\Nes.csproj",
+        "packagesPath": "C:\\Users\\IcaroLavrador\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\IcaroLavrador\\Documents\\Proj\\Nes\\Nes\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "/Users/icaro/.config/NuGet/NuGet.Config"
+          "C:\\Users\\IcaroLavrador\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/partpay-nz/_packaging/partpay.packages/nuget/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -53,7 +56,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.1.100/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
