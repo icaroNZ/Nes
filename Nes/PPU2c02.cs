@@ -1,4 +1,5 @@
 
+using System;
 using PixelEngine;
 
 namespace Nes
@@ -9,10 +10,12 @@ namespace Nes
         private Control _control;
         private Mask _mask;
         private Status _status;
+        private int _cycle;
+        private int _scanLine;
+        private bool _frameComplete;
+        private byte _fineX;
         
-        private  byte [,] _tableName;
         private  byte [,] _tablePattern;
-        private Pixel[] _palScreen;
         private  byte [] _tablePalette; // Unnecessary for NES emulator
 
         private Sprite[] _spritePatternTable;
@@ -21,11 +24,30 @@ namespace Nes
         private ushort _ppuDataBuffer = 0x00;
         private ushort _ppuAddress = 0x0000;
         
+        private Pixel[] _palScreen;
+        private Sprite _screen;
+        private Sprite[] _nameTable;
+        private Sprite[] _patternTable; // Unnecessary for NES emulator
+
+        private LoopyRegister _vRamAddress;
+        private LoopyRegister _tRamAddress;
         
+        public bool FrameComplete = false;
 
         public PPU2c02()
         {
-	        _tableName = new byte[2, 1024];
+	        var _screen = new Sprite(256, 240);
+	        var _nameTable = new Sprite[2]
+	        {
+		        new Sprite(256, 240),
+		        new Sprite(256, 240)
+	        };           
+	        var _patternTable = new Sprite[2]
+	        {
+		        new Sprite(128, 128),
+		        new Sprite(128, 128)
+	        };
+	        
 	        _tablePalette = new byte[32];
 
 	        _tablePattern = new byte[2, 4096];
@@ -35,7 +57,7 @@ namespace Nes
 		        new Sprite(128, 128)
 	        };
 
-	        var _palScreen = new Pixel[]
+	        var _palScreen = new Pixel[0x40]
 	        {
 		        new Pixel(84, 84, 84),
 		        new Pixel(0, 30, 116),
@@ -111,43 +133,95 @@ namespace Nes
         {
             _cartridge = cartridge;
         }
-        
-        public void Clock(){}
+
+        public void Clock()
+        {
+	        var random = new Random();
+	        _screen[_cycle - 1, _scanLine] = _palScreen[random.Next(0,0x40)];
+	        //Double check
+	        _cycle++;
+	        if (_cycle < 341) return;
+	        _cycle = 0;
+	        _scanLine++;
+	        if (_scanLine < 261) return;
+	        _scanLine = -1;
+	        _frameComplete = true;
+        }
+
         public byte CpuRead(ushort address, bool readOnly = false)
         {
-            ushort data = 0x00;
-            switch (address)
-            {
-                case 0x0000: // Control
-                    break;
-                case 0x0001: // Mask
-                    break;
-                case 0x0002: // Status
-	                _status.SetFlag(Status.Flags.VerticalBlank, true);
-	                data = (ushort) ((_status.reg & 0xE0) | (_ppuDataBuffer & 0x1F));
-	                _status.SetFlag(Status.Flags.VerticalBlank, false);
-                    break;
-                case 0x0003: // OAM Address
-                    break;
-                case 0x0004: // OAM Data
-                    break;
-                case 0x0005: // Scroll
-                    break;
-                case 0x0006: // PPU Address
-                    break;
-                case 0x0007: // PPU Data
-	                data = _ppuDataBuffer;
-	                _ppuDataBuffer = PpuRead(_ppuAddress);
+	        ushort data = 0x00;
+	        if (readOnly)
+	        {
+		        switch (address)
+		        {
 
-	                if (_ppuAddress > 0x3F00)
-	                {
-		                data = _ppuDataBuffer;
-	                }
-	                
-                    break;
-                
-            }
-            return 0;
+			        case 0x0000: // Control
+				        data = _control.reg;
+				        break;
+			        case 0x0001: // Mask
+				        data = _mask.reg;
+				        break;
+			        case 0x0002: // Status
+				        data = _status.reg;
+				        break;
+			        case 0x0003: // OAM Address
+				        break;
+			        case 0x0004: // OAM Data
+				        break;
+			        case 0x0005: // Scroll
+				        break;
+			        case 0x0006: // PPU Address
+				        break;
+			        case 0x0007: // PPU Data
+				        break;
+		        }
+	        }
+	        else
+	        {
+		        switch (address)
+		        {
+			        case 0x0000: // Control
+				        break;
+			        case 0x0001: // Mask
+				        break;
+			        case 0x0002: // Status
+				        data = (ushort) ((_status.reg & 0xE0) | (_ppuDataBuffer & 0x1F));
+				        _status.SetFlag(Status.Flags.VerticalBlank, false);
+				        _addressLatch = 0;
+				        break;
+			        case 0x0003: // OAM Address
+				        break;
+			        case 0x0004: // OAM Data
+				        break;
+			        case 0x0005: // Scroll
+				        break;
+			        case 0x0006: // PPU Address
+				        break;
+			        case 0x0007: // PPU Data
+				        data = _ppuDataBuffer;
+				        _ppuDataBuffer = PpuRead(_vRamAddress.reg);
+
+				        if (_vRamAddress.reg > 0x3F00)
+				        {
+					        data = _ppuDataBuffer;
+				        }
+
+				        var inclementModeFlagValue = _control.GetFlag(Control.Flags.IncrementMode);
+				        if (inclementModeFlagValue)
+				        {
+					        _vRamAddress.reg += 1;
+				        }
+				        else
+				        {
+					        _vRamAddress.reg += 32;
+				        }
+
+				        break;
+		        }
+	        }
+
+	        return 0;
         }
 
         public void CpuWrite(ushort address, byte data)
@@ -156,6 +230,8 @@ namespace Nes
             {
                 case 0x0000: // Control
 	                _control.reg = data;
+	                _tRamAddress.SetFlag(LoopyRegister.Flags.NameTableX, _control.GetFlag(Control.Flags.NameTableX));
+	                _tRamAddress.SetFlag(LoopyRegister.Flags.NameTableY, _control.GetFlag(Control.Flags.NameTableY));
 	                break;
                 case 0x0001: // Mask
 	                _mask.reg = data;
@@ -167,21 +243,44 @@ namespace Nes
                 case 0x0004: // OAM Data
                     break;
                 case 0x0005: // Scroll
-                    break;
-                case 0x0006: // PPU Address
 	                if (_addressLatch == 0)
 	                {
+		                _fineX =  (byte) (data & 0x07);
+		                _tRamAddress.SetCoarseX((byte) (data >> 3));
 		                _ppuAddress = (ushort) ((_ppuAddress & 0xFF00) | data << 8); 
 		                _addressLatch = 1;
 	                }
 	                else
 	                {
-		                _ppuAddress = (ushort) ((_ppuAddress & 0xFF00) | data);
-						_addressLatch = 0;
+		                _tRamAddress.SetFineY( (byte) (data & 0x07));
+		                _tRamAddress.SetCoarseY((byte)(data >> 3));
+		                _addressLatch = 0;
+	                }
+                    break;
+                case 0x0006: // PPU Address
+	                if (_addressLatch == 0)
+	                {
+		                _tRamAddress.reg = (ushort) ((data & 0x3F) << 8 | _tRamAddress.reg & 0x00FF);
+		                _addressLatch = 1;
+	                }
+	                else
+	                {
+		                _tRamAddress.reg = (ushort) ( _tRamAddress.reg & 0xFF00 | data);
+		                _vRamAddress = _tRamAddress;
+		                _addressLatch = 0;
 	                }
 	                break;
                 case 0x0007: // PPU Data
-	                PpuWrite(address, data);
+	                PpuWrite(_vRamAddress.reg, data);
+	                var inclementModeFlagValue = _control.GetFlag(Control.Flags.IncrementMode);
+	                if (inclementModeFlagValue)
+	                {
+		                _vRamAddress.reg += 1;
+	                }
+	                else
+	                {
+		                _vRamAddress.reg += 32;
+	                }
                     break;
             }
         }
@@ -238,7 +337,7 @@ namespace Nes
             }
         }
         
-        public void GetPatternTable(ushort i, ushort palette)
+        public Sprite GetPatternTable(ushort i, ushort palette)
         {
             for (ushort titleY = 0; titleY < 16; titleY++)
             {
@@ -249,26 +348,45 @@ namespace Nes
                     {
                         ushort title_lsb = PpuRead((ushort) (i * 0x1000 + offSet + row));
                         ushort title_msb = PpuRead((ushort) (i * 0x1000 + offSet + row + 8));
+                        
                         for (ushort col = 0; col < 8; col++)
                         {
                             ushort pixel = (ushort) ((title_lsb & 0x01) + (title_msb & 0x01));
                             title_lsb >>= 1;
                             title_msb >>= 1;
                             var s = new Sprite(2,2);
+                            
                             _spritePatternTable[i][titleX * 8 + (7 - col), titleY * 8 + row] =
                                 GetColorFromPaletteRam(palette, pixel);
 
                         }
                     }
                 }
-
             }   
+            return _spritePatternTable[i];
+
         }
 
         private Pixel GetColorFromPaletteRam(ushort palette, in ushort pixel)
         {
             return _palScreen[PpuRead((ushort) (0x3F00 + (palette << 2) + pixel))];
         }
+        
+        public Sprite GetScreen()
+        {
+	        return _screen;
+        }
+
+        public Sprite GetNameTable(byte index)
+        {
+	        return _nameTable[index];
+        }        
+        
+        public Sprite GetPatternTable(byte index)
+        {
+	        return _patternTable[index];
+        }
+
     }
 }
 
@@ -276,7 +394,8 @@ namespace Nes
 public struct Control
 {
 	public byte reg;
-	private enum Flags
+
+	public enum Flags
 	{
 		NameTableX = (1 << 0),
 		NameTableY = (1 << 1),
@@ -287,10 +406,10 @@ public struct Control
 		SlaveMode = (1 << 6),
 		EnableNmi = (1 << 7)
 	}
-	
-	private byte GetFlag(Flags f)
+
+	public bool GetFlag(Flags f)
 	{
-		return (byte) ((reg & (byte)f) == 1 ? 1 : 0);
+		return (reg & (byte) f) == (byte) f;
 	}
 }
 
@@ -350,8 +469,8 @@ public struct Mask
 
 public struct LoopyRegister
 {
-	public byte reg;
-	private enum Flags
+	public ushort reg;
+	public enum Flags
 	{
 		CoarseX1 = (1 << 0),
 		CoarseX3 = (1 << 2),
@@ -370,11 +489,50 @@ public struct LoopyRegister
 		FineY3 = (1 << 14),
 		Unused = (1 << 15)
 	}
+
+	public byte GetCoarseX()
+	{
+		var result = (byte) LoopyRegister.Flags.CoarseX1;
+		result <<=  (byte) LoopyRegister.Flags.CoarseX2;
+		result <<=  (byte) LoopyRegister.Flags.CoarseX3;
+		result <<=  (byte) LoopyRegister.Flags.CoarseX4;
+		result <<=  (byte) LoopyRegister.Flags.CoarseX5;
+		return result;
+	}
+
+	public void SetCoarseX(byte value)
+	{
+		reg &= 0xFFE0;
+		reg |= (ushort) (value & 0x1F);
+	}
+
+	public void SetCoarseY(byte value)
+	{
+		reg &= 0xFC1F;
+		reg |= (ushort) (value & 0x3E0);
+	}
+	public void SetFineY(byte value)
+	{
+		reg &= 0x8FFF;
+		value <<= 12;
+		reg |= (ushort) (value & 0x7000);
+	}
+	
+	public void SetFlag(Flags f, bool v)
+	{
+		if (v)
+		{
+			reg |= (byte) f;
+		}
+		else
+		{
+			reg &= (byte) ~f;
+		}	
+	}
 	
 	private byte GetFlag(Flags f)
 	{
 		return (byte) ((reg & (byte)f) == 1 ? 1 : 0);
 	}
-	
 }
 

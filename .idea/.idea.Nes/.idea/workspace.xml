@@ -2,18 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59eace2c-df51-4013-bcd9-ecd81db9148a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Nes/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Nes/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Nes/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Nes/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nes/Bus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/Bus.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nes/CPU6502.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/CPU6502.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nes/Demo_6502.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/Demo_6502.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Nes/bin/Debug/netcoreapp3.1/Nes.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/bin/Debug/netcoreapp3.1/Nes.deps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Nes/bin/Debug/netcoreapp3.1/Nes.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/bin/Debug/netcoreapp3.1/Nes.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Nes/bin/Debug/netcoreapp3.1/Nes.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/bin/Debug/netcoreapp3.1/Nes.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Nes/bin/Debug/netcoreapp3.1/Nes.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/bin/Debug/netcoreapp3.1/Nes.runtimeconfig.dev.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nes/Nes.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/Nes.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nes/PPU2c02.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/PPU2c02.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Nes/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.assets.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.csprojAssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/obj/Debug/netcoreapp3.1/Nes.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nes/obj/Nes.csproj.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/obj/Nes.csproj.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nes/obj/Nes.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/obj/Nes.csproj.nuget.dgspec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Nes/obj/Nes.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Nes/obj/Nes.csproj.nuget.g.props" afterDir="false" />
@@ -43,23 +41,31 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Nes/Bus.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/BBB3B884-123D-47EA-9CD1-5BED540D02AE/1E0/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/34BD0CE0-8D6E-4D26-91D4-66748931FB89/7/ConsolePal.Windows.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Nes/Mapper_000.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/373B0343-309F-48AF-B179-0B0B10177B7C/12/File.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/3A4/List.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4DC43A3E-E08E-422C-84C5-726FE99CF89E/8f/a58b6882/ConsoleEngine.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/d4/2e9da79c/Sprite.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/178/StringBuilderCache.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Nes/Mapper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/35/String.Manipulation.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Nes/Helper.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Nes/Cartridge.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Nes/Demo_6502.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Downloads/ConsoleGameEngine-master/ConsoleGameEngine-master/Source/Color.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Nes/CPU6502.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Downloads/ConsoleGameEngine-master/ConsoleGameEngine-master/Source/Point.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/BBB3B884-123D-47EA-9CD1-5BED540D02AE/3D5/Dictionary.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/49/8e295210/Display.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/34/String.Comparison.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/265/Assembly.CoreCLR.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Nes/Bus.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/48/SR.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Nes/PPU2c02.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Downloads/ConsoleGameEngine-master/ConsoleGameEngine-master/Source/ConsoleEngine.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Downloads/ConsoleGameEngine-master/ConsoleGameEngine-master/Source/ConsoleEnums.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/8e/f42e0578/ResxHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/83DD281B-6842-4109-B304-1E5E61716E4F/F/SortedDictionary.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/da/e0b1d462/Game.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Nes/Cartridge.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Nes/Mapper_000.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Nes/Program.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$USER_HOME$/Downloads/ConsoleGameEngine-master/ConsoleGameEngine-master/Source/ConsoleGame.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/59/509c2a51/Pixel.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/e2/e2554cad/Font.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/1d/e3ff6e0e/Windows.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Nes/Demo_6502.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Nes/CPU6502.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -68,15 +74,15 @@
         <option value="$PROJECT_DIR$/Nes/Olc6502.cs" />
         <option value="$PROJECT_DIR$/Nes/Mapper0.cs" />
         <option value="$PROJECT_DIR$/Nes/Helper.cs" />
-        <option value="$PROJECT_DIR$/Nes/Program.cs" />
         <option value="$PROJECT_DIR$/Nes/Cartridge.cs" />
-        <option value="$PROJECT_DIR$/Nes/PPU2c02.cs" />
         <option value="$PROJECT_DIR$/Nes/Mapper.cs" />
         <option value="$PROJECT_DIR$/Nes/Mapper_000.cs" />
-        <option value="$PROJECT_DIR$/Nes/Bus.cs" />
         <option value="$USER_HOME$/Downloads/ConsoleGameEngine-master/ConsoleGameEngine-master/Source/ConsoleEngine.cs" />
         <option value="$PROJECT_DIR$/Nes/CPU6502.cs" />
+        <option value="$PROJECT_DIR$/Nes/Bus.cs" />
+        <option value="$PROJECT_DIR$/Nes/Program.cs" />
         <option value="$PROJECT_DIR$/Nes/Demo_6502.cs" />
+        <option value="$PROJECT_DIR$/Nes/PPU2c02.cs" />
       </list>
     </option>
   </component>
@@ -148,13 +154,14 @@
       <updated>1580372824967</updated>
       <workItem from="1580372826179" duration="5058000" />
       <workItem from="1580438426302" duration="8508000" />
+      <workItem from="1580894795423" duration="16733000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="UnityProjectConfiguration" hasMinimizedUI="null" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -179,106 +186,110 @@
       <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state x="1132" y="213" key="ExperimentsDialog/0.23.1920.1124@0.23.1920.1124" timestamp="1580712282060" />
-    <state width="1234" height="568" key="GridCell.Tab.0.bottom" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.0.bottom" timestamp="1580977504329">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.0.bottom/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.0.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274372" />
-    <state width="1234" height="568" key="GridCell.Tab.0.center" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.0.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580977504329" />
+    <state width="1207" height="334" key="GridCell.Tab.0.center" timestamp="1580977504329">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.0.center/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.0.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274372" />
-    <state width="1234" height="568" key="GridCell.Tab.0.left" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.0.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580977504329" />
+    <state width="1207" height="334" key="GridCell.Tab.0.left" timestamp="1580977504328">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.0.left/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.0.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274372" />
-    <state width="1234" height="568" key="GridCell.Tab.0.right" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.0.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580977504328" />
+    <state width="1207" height="334" key="GridCell.Tab.0.right" timestamp="1580977504329">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.0.right/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.0.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274372" />
-    <state width="1234" height="568" key="GridCell.Tab.1.bottom" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.0.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580977504329" />
+    <state width="1207" height="334" key="GridCell.Tab.1.bottom" timestamp="1580977496484">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.1.bottom/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.1.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274373" />
-    <state width="1234" height="568" key="GridCell.Tab.1.center" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.1.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580977496484" />
+    <state width="1207" height="334" key="GridCell.Tab.1.center" timestamp="1580977496483">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.1.center/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.1.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274373" />
-    <state width="1234" height="568" key="GridCell.Tab.1.left" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.1.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580977496483" />
+    <state width="1207" height="334" key="GridCell.Tab.1.left" timestamp="1580977496483">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.1.left/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.1.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274373" />
-    <state width="1234" height="568" key="GridCell.Tab.1.right" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.1.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580977496483" />
+    <state width="1207" height="334" key="GridCell.Tab.1.right" timestamp="1580977496484">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.1.right/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.1.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274373" />
-    <state width="1234" height="568" key="GridCell.Tab.2.bottom" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.1.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580977496484" />
+    <state width="1207" height="334" key="GridCell.Tab.2.bottom" timestamp="1580977494087">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.2.bottom/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.2.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274374" />
-    <state width="1234" height="568" key="GridCell.Tab.2.center" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.2.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580977494087" />
+    <state width="1207" height="334" key="GridCell.Tab.2.center" timestamp="1580977494087">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.2.center/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.2.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274374" />
-    <state width="1234" height="568" key="GridCell.Tab.2.left" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.2.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580977494087" />
+    <state width="1207" height="334" key="GridCell.Tab.2.left" timestamp="1580977494086">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.2.left/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.2.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274374" />
-    <state width="1234" height="568" key="GridCell.Tab.2.right" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.2.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580977494086" />
+    <state width="1207" height="334" key="GridCell.Tab.2.right" timestamp="1580977494087">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.2.right/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.2.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274374" />
-    <state width="1234" height="568" key="GridCell.Tab.3.bottom" timestamp="1580877582736">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.2.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580977494087" />
+    <state width="1207" height="334" key="GridCell.Tab.3.bottom" timestamp="1580977494089">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.3.bottom/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582736" />
-    <state width="1036" height="334" key="GridCell.Tab.3.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274375" />
-    <state width="1234" height="568" key="GridCell.Tab.3.center" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.3.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580977494089" />
+    <state width="1207" height="334" key="GridCell.Tab.3.center" timestamp="1580977494088">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.3.center/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.3.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274375" />
-    <state width="1234" height="568" key="GridCell.Tab.3.left" timestamp="1580877582735">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.3.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580977494088" />
+    <state width="1207" height="334" key="GridCell.Tab.3.left" timestamp="1580977494088">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.3.left/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582735" />
-    <state width="1036" height="334" key="GridCell.Tab.3.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274375" />
-    <state width="1234" height="568" key="GridCell.Tab.3.right" timestamp="1580877582736">
-      <screen x="-2560" y="0" width="2560" height="1400" />
+    <state width="1207" height="334" key="GridCell.Tab.3.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580977494088" />
+    <state width="1207" height="334" key="GridCell.Tab.3.right" timestamp="1580977494088">
+      <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state width="1234" height="568" key="GridCell.Tab.3.right/0.0.1536.824/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1580877582736" />
-    <state width="1036" height="334" key="GridCell.Tab.3.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274375" />
-    <state width="1036" height="334" key="GridCell.Tab.4.bottom" timestamp="1580812274376">
+    <state width="1207" height="334" key="GridCell.Tab.3.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580977494088" />
+    <state width="1207" height="334" key="GridCell.Tab.4.bottom" timestamp="1580977494090">
       <screen x="0" y="23" width="1920" height="1124" />
     </state>
-    <state width="1036" height="334" key="GridCell.Tab.4.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274376" />
-    <state width="1036" height="334" key="GridCell.Tab.4.center" timestamp="1580812274376">
+    <state width="1207" height="334" key="GridCell.Tab.4.bottom/0.23.1920.1124@0.23.1920.1124" timestamp="1580977494090" />
+    <state width="1207" height="334" key="GridCell.Tab.4.center" timestamp="1580977494090">
       <screen x="0" y="23" width="1920" height="1124" />
     </state>
-    <state width="1036" height="334" key="GridCell.Tab.4.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274376" />
-    <state width="1036" height="334" key="GridCell.Tab.4.left" timestamp="1580812274376">
+    <state width="1207" height="334" key="GridCell.Tab.4.center/0.23.1920.1124@0.23.1920.1124" timestamp="1580977494090" />
+    <state width="1207" height="334" key="GridCell.Tab.4.left" timestamp="1580977494089">
       <screen x="0" y="23" width="1920" height="1124" />
     </state>
-    <state width="1036" height="334" key="GridCell.Tab.4.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274376" />
-    <state width="1036" height="334" key="GridCell.Tab.4.right" timestamp="1580812274376">
+    <state width="1207" height="334" key="GridCell.Tab.4.left/0.23.1920.1124@0.23.1920.1124" timestamp="1580977494089" />
+    <state width="1207" height="334" key="GridCell.Tab.4.right" timestamp="1580977494090">
       <screen x="0" y="23" width="1920" height="1124" />
     </state>
-    <state width="1036" height="334" key="GridCell.Tab.4.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580812274376" />
+    <state width="1207" height="334" key="GridCell.Tab.4.right/0.23.1920.1124@0.23.1920.1124" timestamp="1580977494090" />
     <state x="891" y="167" key="Rider.ProjectTemplateDialog.Size" timestamp="1580372825109">
       <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state x="891" y="167" key="Rider.ProjectTemplateDialog.Size/0.23.1920.1124@0.23.1920.1124" timestamp="1580372825109" />
+    <state x="1216" y="307" key="RiderGenerateDialog" timestamp="1580935504789">
+      <screen x="0" y="23" width="1920" height="1124" />
+    </state>
+    <state x="1216" y="307" key="RiderGenerateDialog/0.23.1920.1124@0.23.1920.1124" timestamp="1580935504789" />
     <state x="823" y="162" key="SettingsEditor" timestamp="1580523980082">
       <screen x="0" y="23" width="1920" height="1124" />
     </state>
@@ -287,15 +298,15 @@
       <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state x="1172" y="234" key="VCS.ChangeListViewerDialog/0.23.1920.1124@0.23.1920.1124" timestamp="1580805063693" />
-    <state x="558" y="219" width="805" height="732" key="find.popup" timestamp="1580539698867">
+    <state x="558" y="219" width="805" height="732" key="find.popup" timestamp="1580957401236">
       <screen x="0" y="23" width="1920" height="1124" />
     </state>
     <state x="446" y="144" width="644" height="536" key="find.popup/0.0.1536.824/-2560.0.2560.1400@0.0.1536.824" timestamp="1580438522874" />
-    <state x="558" y="219" width="805" height="732" key="find.popup/0.23.1920.1124@0.23.1920.1124" timestamp="1580539698867" />
-    <state x="1033" y="242" width="672" height="678" key="search.everywhere.popup" timestamp="1580806908978">
+    <state x="558" y="219" width="805" height="732" key="find.popup/0.23.1920.1124@0.23.1920.1124" timestamp="1580957401236" />
+    <state x="1033" y="242" width="672" height="678" key="search.everywhere.popup" timestamp="1580935374141">
       <screen x="0" y="23" width="1920" height="1124" />
     </state>
-    <state x="1033" y="242" width="672" height="678" key="search.everywhere.popup/0.23.1920.1124@0.23.1920.1124" timestamp="1580806908978" />
+    <state x="1033" y="242" width="672" height="678" key="search.everywhere.popup/0.23.1920.1124@0.23.1920.1124" timestamp="1580935374141" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -311,26 +322,156 @@
           <line>104</line>
           <properties documentPath="$PROJECT_DIR$/Nes/CPU6502.cs" initialLine="104">
             <startOffsets>
-              <option value="22863" />
+              <option value="22860" />
             </startOffsets>
             <endOffsets>
-              <option value="22927" />
+              <option value="22924" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="75" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Nes/Demo_6502.cs</url>
-          <line>129</line>
-          <properties documentPath="$PROJECT_DIR$/Nes/Demo_6502.cs" initialLine="129">
+          <url>file://$PROJECT_DIR$/Nes/CPU6502.cs</url>
+          <line>125</line>
+          <properties documentPath="$PROJECT_DIR$/Nes/CPU6502.cs" initialLine="125">
             <startOffsets>
-              <option value="4514" />
+              <option value="23313" />
             </startOffsets>
             <endOffsets>
-              <option value="4537" />
+              <option value="23332" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="103" />
+          <option name="timeStamp" value="104" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Nes/CPU6502.cs</url>
+          <line>729</line>
+          <properties documentPath="$PROJECT_DIR$/Nes/CPU6502.cs" initialLine="729">
+            <startOffsets>
+              <option value="34010" />
+            </startOffsets>
+            <endOffsets>
+              <option value="34042" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Nes/CPU6502.cs</url>
+          <line>749</line>
+          <properties documentPath="$PROJECT_DIR$/Nes/CPU6502.cs" initialLine="750">
+            <startOffsets>
+              <option value="34314" />
+            </startOffsets>
+            <endOffsets>
+              <option value="34361" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="106" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Nes/PPU2c02.cs</url>
+          <line>139</line>
+          <properties documentPath="$PROJECT_DIR$/Nes/PPU2c02.cs" initialLine="135">
+            <startOffsets>
+              <option value="3969" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4034" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="110" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/e2/e2554cad/Font.cs</url>
+          <line>45</line>
+          <properties documentPath="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/e2/e2554cad/Font.cs" initialLine="45">
+            <startOffsets>
+              <option value="1248" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1271" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="112" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/e2/e2554cad/Font.cs</url>
+          <line>56</line>
+          <properties documentPath="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/e2/e2554cad/Font.cs" initialLine="56">
+            <startOffsets>
+              <option value="1678" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1741" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="114" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/8e/f42e0578/ResxHelper.cs</url>
+          <line>19</line>
+          <properties documentPath="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/8e/f42e0578/ResxHelper.cs" initialLine="19">
+            <startOffsets>
+              <option value="539" />
+            </startOffsets>
+            <endOffsets>
+              <option value="616" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="116" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/8e/f42e0578/ResxHelper.cs</url>
+          <line>35</line>
+          <properties documentPath="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/8e/f42e0578/ResxHelper.cs" initialLine="35">
+            <startOffsets>
+              <option value="1028" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1089" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="118" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/265/Assembly.CoreCLR.cs</url>
+          <line>50</line>
+          <properties documentPath="$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2050C92A-D081-4D01-836E-66C4768FC8A5/265/Assembly.CoreCLR.cs" initialLine="50">
+            <startOffsets>
+              <option value="2495" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2519" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="119" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/8e/f42e0578/ResxHelper.cs</url>
+          <line>36</line>
+          <properties documentPath="$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ABCC7B65-043B-4F2B-BFC4-2BDD459AD169/8e/f42e0578/ResxHelper.cs" initialLine="36">
+            <startOffsets>
+              <option value="1096" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1147" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="120" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Nes/PPU2c02.cs</url>
+          <line>273</line>
+          <properties documentPath="$PROJECT_DIR$/Nes/PPU2c02.cs" initialLine="214">
+            <startOffsets>
+              <option value="8105" />
+            </startOffsets>
+            <endOffsets>
+              <option value="8138" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="121" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

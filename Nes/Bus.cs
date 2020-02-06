@@ -9,7 +9,7 @@ namespace Nes
         public byte[] CpuRam { get; set; }
 
         public CPU6502 _cpu;
-        private PPU2c02 _ppu;
+        public PPU2c02 _ppu;
         private Cartridge _cartridge;
         private int _systemClockCounter = 0;
 

@@ -14,4 +14,16 @@
       </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="ConsoleGameEngine\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="ConsoleGameEngine\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="ConsoleGameEngine\**" />
+    </ItemGroup>
+
 </Project>

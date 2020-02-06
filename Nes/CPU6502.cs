@@ -17,7 +17,7 @@ namespace Nes
 
 		private byte _fetched = 0x0000;
 
-		private ushort _address_abs = 0x0000;
+		private int _address_abs = 0x0000;
 		private ushort _address_rel = 0x0000;
 
 		private byte _opcode = 00;
@@ -284,7 +284,7 @@ namespace Nes
 			if (_instructions[_opcode].addressMode == IMP)
 				A = value;
 			else
-				Write(_address_abs, value);
+				Write((ushort) _address_abs, value);
 			return 0;
 		}
 
@@ -418,7 +418,7 @@ namespace Nes
 		{
 			Fetch();
 			var temp = _fetched - 1;
-			Write(_address_abs, (byte) (temp & 0x00FF));
+			Write((ushort) _address_abs, (byte) (temp & 0x00FF));
 			SetFlag(Flags6502.Z, (temp & 0x00FF) == 0x0000);
 			SetFlag(Flags6502.N, (temp & 0x0080) == 0x0080);
 			return 0;		}
@@ -452,7 +452,7 @@ namespace Nes
 		{
 			Fetch();
 			var temp = _fetched + 1;
-			Write(_address_abs, (byte) (temp & 0x00FF));
+			Write((ushort) _address_abs, (byte) (temp & 0x00FF));
 			SetFlag(Flags6502.Z, (temp & 0x00FF) == 0x0000);
 			SetFlag(Flags6502.N, (temp & 0x0080) == 0x0080);
 			return 0;		}
@@ -475,7 +475,7 @@ namespace Nes
 
 		private byte JMP()
 		{
-			Pc = _address_abs;
+			Pc = (ushort) _address_abs;
 			return 0;
 		}
 
@@ -488,7 +488,7 @@ namespace Nes
 			Write((ushort) (0x0100 + StackPointer), (byte) (Pc & 0x00FF));
 			StackPointer--;
 
-			Pc = _address_abs;
+			Pc = (ushort) _address_abs;
 			return 0;
 		}
 
@@ -623,13 +623,13 @@ namespace Nes
 
 		private byte STA()
 		{
-			Write(_address_abs, X);
+			Write((ushort) _address_abs, X);
 			return 0;
 		}
 
 		private byte STX()
 		{
-			Write(_address_abs, X);
+			Write((ushort) _address_abs, X);
 			return 0;
 		}
 
@@ -716,7 +716,7 @@ namespace Nes
 		{
 			if (_instructions[_opcode].addressMode != IMP)
 			{
-				_fetched = Read(_address_abs);
+				_fetched = Read((ushort) _address_abs);
 			}
 
 			return _fetched;
@@ -733,7 +733,7 @@ namespace Nes
 				_cycles++;
 			}
 
-			Pc = _address_abs;
+			Pc = (ushort) _address_abs;
 		}
 
 		public bool Complete()
@@ -746,22 +746,15 @@ namespace Nes
 			if (GetFlag(f) != 0) return;
 			
 			_cycles++;
-			if ((_address_rel & 0x80) == 0x80)
-			{
-				_address_abs = (ushort) (Pc - (_address_rel & 0x7F));
-			}
-			else
-			{
-				_address_abs = (ushort) (Pc + (_address_rel & 0x7F));
 
-			}
+			_address_abs =  (ushort) (Pc + (_address_rel));
 
 			if ((_address_abs & 0xFF00) != (Pc & 0xFF00))
 			{
 				_cycles++;
 			}
 
-			Pc = _address_abs;
+			Pc = (ushort) _address_abs;
 		}
 		
 
